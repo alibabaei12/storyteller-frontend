@@ -29,38 +29,53 @@ const handleResponse = async (response) => {
   return response.json();
 };
 
+// Common fetch options
+const fetchOptions = {
+  mode: "cors",
+  credentials: "same-origin",
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  },
+};
+
 // API methods
 export const apiService = {
   // Check API status
   checkStatus: async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/status`);
+      const response = await fetch(`${API_BASE_URL}/status`, fetchOptions);
       return handleResponse(response);
     } catch (error) {
       console.error("API Status Error:", error);
-      throw new Error("Failed to connect to StoryTeller API server");
+      throw new Error(
+        `Failed to connect to StoryTeller API server: ${error.message}`
+      );
     }
   },
 
   // Get all stories
   getStories: async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/stories`);
+      const response = await fetch(`${API_BASE_URL}/stories`, fetchOptions);
       return handleResponse(response);
     } catch (error) {
       console.error("Get Stories Error:", error);
-      throw new Error("Failed to retrieve stories");
+      throw new Error(`Failed to retrieve stories: ${error.message}`);
     }
   },
 
   // Get a specific story
   getStory: async (storyId) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/stories/${storyId}`);
+      const response = await fetch(
+        `${API_BASE_URL}/stories/${storyId}`,
+        fetchOptions
+      );
       return handleResponse(response);
     } catch (error) {
       console.error("Get Story Error:", error);
-      throw new Error("Failed to retrieve story");
+      throw new Error(`Failed to retrieve story: ${error.message}`);
     }
   },
 
@@ -68,12 +83,13 @@ export const apiService = {
   deleteStory: async (storyId) => {
     try {
       const response = await fetch(`${API_BASE_URL}/stories/${storyId}`, {
+        ...fetchOptions,
         method: "DELETE",
       });
       return handleResponse(response);
     } catch (error) {
       console.error("Delete Story Error:", error);
-      throw new Error("Failed to delete story");
+      throw new Error(`Failed to delete story: ${error.message}`);
     }
   },
 
@@ -81,16 +97,14 @@ export const apiService = {
   createStory: async (storyParams) => {
     try {
       const response = await fetch(`${API_BASE_URL}/stories`, {
+        ...fetchOptions,
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify(storyParams),
       });
       return handleResponse(response);
     } catch (error) {
       console.error("Create Story Error:", error);
-      throw new Error("Failed to create story");
+      throw new Error(`Failed to create story: ${error.message}`);
     }
   },
 
@@ -100,13 +114,14 @@ export const apiService = {
       const response = await fetch(
         `${API_BASE_URL}/stories/${storyId}/choices/${choiceId}`,
         {
+          ...fetchOptions,
           method: "POST",
         }
       );
       return handleResponse(response);
     } catch (error) {
       console.error("Make Choice Error:", error);
-      throw error; // Pass the error through instead of creating a generic one
+      return error; // Pass the error through instead of creating a generic one
     }
   },
 };
