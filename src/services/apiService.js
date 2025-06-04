@@ -1,11 +1,21 @@
 // API service for StoryTeller
 
-const API_BASE_URL = "/api";
+const API_BASE_URL =
+  process.env.REACT_APP_API_URL || "http://localhost:5000/api";
 
 // Helper to handle API responses
 const handleResponse = async (response) => {
   if (!response.ok) {
     const errorData = await response.json().catch(() => null);
+
+    // Special handling for usage limit errors (HTTP 429)
+    if (response.status === 429) {
+      throw new Error(
+        errorData?.message ||
+          "You've reached your daily story continuation limit. Please try again tomorrow."
+      );
+    }
+
     throw new Error(errorData?.error || `HTTP error ${response.status}`);
   }
   return response.json();
@@ -88,7 +98,7 @@ export const apiService = {
       return handleResponse(response);
     } catch (error) {
       console.error("Make Choice Error:", error);
-      throw new Error("Failed to make choice");
+      throw error; // Pass the error through instead of creating a generic one
     }
   },
 };
