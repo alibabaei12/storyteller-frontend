@@ -10,6 +10,7 @@ const StoryPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [makingChoice, setMakingChoice] = useState(false);
+  const [usageLimit, setUsageLimit] = useState(false);
 
   // Fetch story data
   useEffect(() => {
@@ -39,6 +40,7 @@ const StoryPage = () => {
     try {
       setMakingChoice(true);
       setError("");
+      setUsageLimit(false);
 
       // Make the choice
       const updatedStory = await apiService.makeChoice(storyId, choiceId);
@@ -48,7 +50,17 @@ const StoryPage = () => {
       window.scrollTo(0, 0);
     } catch (error) {
       console.error("Error making choice:", error);
-      setError("Failed to process your choice. Please try again.");
+
+      // Check if this is a usage limit error
+      if (
+        error.message.includes("limit") ||
+        error.message.includes("reached")
+      ) {
+        setUsageLimit(true);
+        setError(error.message);
+      } else {
+        setError("Failed to process your choice. Please try again.");
+      }
     } finally {
       setMakingChoice(false);
     }
@@ -67,7 +79,7 @@ const StoryPage = () => {
     );
   }
 
-  if (error) {
+  if (error && !usageLimit) {
     return (
       <div className="story-error">
         <div className="error">{error}</div>
@@ -109,33 +121,49 @@ const StoryPage = () => {
 
         <div className="story-content">{currentNode.content}</div>
 
-        <h3 className="choices-title">What will you do?</h3>
+        {usageLimit ? (
+          <div className="usage-limit-error">
+            <h3 className="usage-limit-title">Usage Limit Reached</h3>
+            <p className="usage-limit-message">{error}</p>
+            <p className="usage-limit-info">
+              We limit the number of story continuations to control API costs.
+              Your story has been saved, and you can return to continue later.
+            </p>
+            <button className="btn" onClick={handleBack}>
+              Save & Return to Stories
+            </button>
+          </div>
+        ) : (
+          <>
+            <h3 className="choices-title">What will you do?</h3>
 
-        <div className="choices">
-          {makingChoice ? (
-            <div className="loading-choices">
-              <div className="spinner"></div>
-              <p>Generating story continuation...</p>
+            <div className="choices">
+              {makingChoice ? (
+                <div className="loading-choices">
+                  <div className="spinner"></div>
+                  <p>Generating story continuation...</p>
+                </div>
+              ) : (
+                currentNode.choices.map((choice) => (
+                  <button
+                    key={choice.id}
+                    className="choice-btn"
+                    onClick={() => handleChoice(choice.id)}
+                    disabled={makingChoice}
+                  >
+                    {choice.text}
+                  </button>
+                ))
+              )}
             </div>
-          ) : (
-            currentNode.choices.map((choice) => (
-              <button
-                key={choice.id}
-                className="choice-btn"
-                onClick={() => handleChoice(choice.id)}
-                disabled={makingChoice}
-              >
-                {choice.text}
-              </button>
-            ))
-          )}
-        </div>
 
-        <div className="story-actions">
-          <button className="btn" onClick={handleBack}>
-            Save & Return to Stories
-          </button>
-        </div>
+            <div className="story-actions">
+              <button className="btn" onClick={handleBack}>
+                Save & Return to Stories
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

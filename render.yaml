@@ -2,11 +2,12 @@ services:
   - type: web
     name: storyteller-frontend
     env: static
-    buildCommand: chmod +x build.sh && ./build.sh
+    buildCommand: npm run build
     staticPublishPath: ./build
-    runtime: node
-    nodeVersion: 16
+    branch: main
     envVars:
+      - key: NODE_VERSION
+        value: 16
       - key: REACT_APP_API_URL
         value: https://storyteller-backend-liry.onrender.com/api
     routes:

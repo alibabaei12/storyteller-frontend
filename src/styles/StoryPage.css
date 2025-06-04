@@ -51,4 +51,32 @@
 
 .story-error .btn {
   margin-top: 20px;
+}
+
+/* Usage limit error styling */
+.usage-limit-error {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #fff8e1;
+  border: 1px solid #ffd54f;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.usage-limit-title {
+  color: #ff9800;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+
+.usage-limit-message {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+.usage-limit-info {
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+  color: #666;
 } 

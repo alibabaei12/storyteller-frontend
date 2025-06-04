@@ -45,7 +45,7 @@
 }
 
 .btn-accent:hover {
-  background-color: #f57c00;
+  background-color: var(--accent-light);
 }
 
 .loading {
@@ -70,8 +70,8 @@
 }
 
 .error {
-  color: #d32f2f;
-  background-color: #ffebee;
+  color: #ff5252;
+  background-color: #ffe9e9;
   padding: 15px;
   border-radius: var(--border-radius);
   margin-bottom: 20px;
