@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "npx react-scripts build",
+    "build": "chmod +x deploy.sh && ./deploy.sh",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "render-build": "chmod +x deploy.sh && ./deploy.sh"
