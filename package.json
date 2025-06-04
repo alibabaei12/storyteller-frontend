@@ -17,7 +17,7 @@
     "build": "npx react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "render-build": "npm install --legacy-peer-deps && npx react-scripts build"
+    "render-build": "chmod +x deploy.sh && ./deploy.sh"
   },
   "eslintConfig": {
     "extends": [
