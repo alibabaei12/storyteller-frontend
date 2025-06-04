@@ -1,7 +1,15 @@
 // API service for StoryTeller
 
+// For production, use the environment variable
+// For local development, use localhost with correct port
+// For the deployed backend use this as fallback
 const API_BASE_URL =
-  process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+  process.env.REACT_APP_API_URL ||
+  (window.location.hostname === "localhost"
+    ? "http://localhost:5001/api"
+    : "https://storyteller-backend-liry.onrender.com/api");
+
+console.log("Using API URL:", API_BASE_URL);
 
 // Helper to handle API responses
 const handleResponse = async (response) => {
