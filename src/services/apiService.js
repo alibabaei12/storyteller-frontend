@@ -84,7 +84,13 @@ const handleResponse = async (response) => {
   });
 
   if (!response.ok) {
-    const errorData = await response.json().catch(() => null);
+    let errorData = null;
+    try {
+      const text = await response.text();
+      errorData = text ? JSON.parse(text) : null;
+    } catch (e) {
+      console.warn("Could not parse error response as JSON:", e);
+    }
     console.error("API error response:", errorData);
 
     // Special handling for usage limit errors (HTTP 429)
@@ -104,7 +110,18 @@ const handleResponse = async (response) => {
 
     throw new Error(errorData?.error || `HTTP error ${response.status}`);
   }
-  return response.json();
+
+  // Handle successful responses safely
+  try {
+    const text = await response.text();
+    if (!text) {
+      return {}; // Return empty object for empty responses
+    }
+    return JSON.parse(text);
+  } catch (e) {
+    console.error("Could not parse response as JSON:", e);
+    throw new Error("Invalid JSON response from server");
+  }
 };
 
 // API methods
