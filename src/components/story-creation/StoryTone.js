@@ -6,70 +6,61 @@ const tones = [
     id: "optimistic",
     name: "Optimistic",
     description:
-      "A hopeful journey where challenges are overcome with perseverance and positivity",
-    icon: "😊",
+      "Hopeful and uplifting, focusing on growth and positive outcomes",
+    icon: "🌅",
   },
   {
     id: "tragic",
     name: "Tragic",
-    description:
-      "A bittersweet or sorrowful story where loss, sacrifice, or downfall play key roles",
-    icon: "😔",
+    description: "Bittersweet and sorrowful, exploring loss and sacrifice",
+    icon: "💔",
   },
   {
     id: "epic",
     name: "Epic",
-    description:
-      "A grand, larger-than-life adventure filled with heroism, trials, and major turning points",
-    icon: "🏰",
+    description: "Grand and heroic, with larger-than-life challenges",
+    icon: "⚔️",
   },
   {
     id: "thrilling",
     name: "Thrilling",
-    description:
-      "A fast-paced, edge-of-your-seat experience full of danger, twists, and suspense",
-    icon: "⚡️",
+    description: "Fast-paced and exciting, full of danger and suspense",
+    icon: "⚡",
   },
   {
     id: "mystery",
     name: "Mystery",
-    description:
-      "A story driven by secrets, hidden truths, and the uncovering of the unknown",
-    icon: "🕵️‍♂️",
+    description: "Intriguing and puzzling, driven by secrets and discovery",
+    icon: "🔍",
   },
   {
     id: "romantic",
     name: "Romantic",
-    description:
-      "A tale centered around relationships, love, and emotional connections",
-    icon: "❤️",
+    description: "Focusing on relationships and emotional connections",
+    icon: "💕",
   },
   {
     id: "dark",
     name: "Dark",
-    description:
-      "A grim, morally complex world where choices are hard and consequences are heavy",
+    description: "Grim and morally complex, exploring difficult choices",
     icon: "🌑",
   },
   {
     id: "whimsical",
     name: "Whimsical",
-    description:
-      "A playful, imaginative story filled with wonder, oddities, and a sense of magic",
-    icon: "🎠",
+    description: "Playful and imaginative, filled with wonder and oddities",
+    icon: "🎭",
   },
   {
     id: "gritty",
     name: "Gritty",
-    description:
-      "A realistic, tough world where survival and resilience are constantly tested",
-    icon: "🛠️",
+    description: "Realistic and tough, where survival is constantly tested",
+    icon: "🏜️",
   },
   {
     id: "philosophical",
     name: "Philosophical",
-    description:
-      "A contemplative journey focusing on self-discovery, existential questions, and deep themes",
+    description: "Contemplative and deep, exploring existential questions",
     icon: "🤔",
   },
 ];
@@ -77,14 +68,14 @@ const tones = [
 const storyLengths = [
   {
     id: "short",
-    name: "Short Story",
-    description: "A brief adventure that can be completed in 5-8 turns",
+    name: "Quick Adventure",
+    description: "A focused story that can be completed in 5-8 turns",
     icon: "📏",
   },
   {
     id: "medium",
-    name: "Medium Length",
-    description: "A moderate journey that spans 10-15 turns",
+    name: "Standard Tale",
+    description: "A balanced story experience lasting 10-15 turns",
     icon: "📏📏",
   },
   {
@@ -98,123 +89,6 @@ const storyLengths = [
     name: "Infinite Adventure",
     description: "A never-ending story that continues as long as you wish",
     icon: "♾️",
-  },
-];
-
-// Define power systems by setting (keeping this for future reference but not using in UI)
-const powerSystemsBySettings = {
-  modern: [
-    {
-      id: "none",
-      name: "No Special Powers",
-      description: "A realistic story without supernatural elements",
-    },
-    {
-      id: "hidden",
-      name: "Hidden Abilities",
-      description:
-        "Subtle powers or extraordinary skills that aren't immediately apparent",
-    },
-  ],
-  cultivation: [
-    {
-      id: "qi",
-      name: "Qi Cultivation",
-      description:
-        "Internal energy that can be refined and used for martial arts",
-    },
-    {
-      id: "spiritual",
-      name: "Spiritual Power",
-      description: "Connection to mystical forces and spiritual realms",
-    },
-    {
-      id: "elemental",
-      name: "Elemental Control",
-      description:
-        "Mastery over natural elements like fire, water, earth, or wind",
-    },
-  ],
-  fantasy: [
-    {
-      id: "magic",
-      name: "Magic",
-      description: "Spells, enchantments, and magical abilities",
-    },
-    {
-      id: "divine",
-      name: "Divine Blessing",
-      description: "Powers granted by gods or higher beings",
-    },
-    {
-      id: "artifact",
-      name: "Magical Artifacts",
-      description: "Drawing power from enchanted items and ancient relics",
-    },
-  ],
-  academy: [
-    {
-      id: "magic",
-      name: "Magic",
-      description: "Spells, enchantments, and magical abilities",
-    },
-    {
-      id: "psychic",
-      name: "Psychic Abilities",
-      description: "Mental powers like telepathy, telekinesis, or clairvoyance",
-    },
-  ],
-  scifi: [
-    {
-      id: "tech",
-      name: "Advanced Technology",
-      description:
-        "High-tech gadgets, cybernetic enhancements, or AI companions",
-    },
-    {
-      id: "psionic",
-      name: "Psionic Powers",
-      description: "Mental abilities evolved through human advancement",
-    },
-  ],
-  apocalypse: [
-    {
-      id: "survival",
-      name: "Survival Skills",
-      description: "Practical abilities to survive in a harsh world",
-    },
-    {
-      id: "mutation",
-      name: "Mutations",
-      description: "Evolved abilities due to apocalyptic changes",
-    },
-  ],
-  gamelike: [
-    {
-      id: "levels",
-      name: "Level System",
-      description: "Growing stronger through gaining experience and levels",
-    },
-    {
-      id: "skills",
-      name: "Skill Acquisition",
-      description: "Learning and mastering specific abilities and techniques",
-    },
-    {
-      id: "class",
-      name: "Character Class",
-      description:
-        "Specialized role with unique abilities and progression path",
-    },
-  ],
-};
-
-// Default fallback if setting doesn't match
-const defaultPowerSystems = [
-  {
-    id: "none",
-    name: "No Special Powers",
-    description: "A story focused on natural human abilities",
   },
 ];
 
