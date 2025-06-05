@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import "../styles/Header.css";
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { currentUser, userProfile, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const handleLogout = async () => {
     try {
@@ -20,6 +22,27 @@ const Header = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  // Close dropdown when navigating to a new page
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }
+  }, [isMenuOpen]);
 
   // Get first letter of display name or email for avatar placeholder
   const getInitial = () => {
@@ -57,7 +80,7 @@ const Header = () => {
               <button onClick={() => navigate("/stories")} className="nav-btn">
                 My Stories
               </button>
-              <div className="user-profile-menu">
+              <div className="user-profile-menu" ref={dropdownRef}>
                 <button
                   className="profile-button"
                   onClick={toggleMenu}
