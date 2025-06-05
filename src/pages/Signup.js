@@ -12,7 +12,7 @@ const Signup = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { signup } = useAuth();
+  const { signup, loginWithGoogle } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,12 +51,42 @@ const Signup = () => {
     setLoading(false);
   };
 
+  const handleGoogleSignIn = async () => {
+    try {
+      setError("");
+      setLoading(true);
+      await loginWithGoogle();
+      navigate("/");
+    } catch (err) {
+      setError("Failed to sign up with Google: " + err.message);
+      console.error(err);
+    }
+    setLoading(false);
+  };
+
   return (
     <div className="auth-container">
       <div className="auth-card">
         <h2>Create an Account</h2>
 
         {error && <div className="auth-error">{error}</div>}
+
+        {/* Social Sign-In Options */}
+        <div className="social-auth">
+          <button
+            type="button"
+            onClick={handleGoogleSignIn}
+            disabled={loading}
+            className="social-auth-button google-auth"
+          >
+            <span className="social-icon">🌐</span>
+            Continue with Google
+          </button>
+        </div>
+
+        <div className="auth-divider">
+          <span>or</span>
+        </div>
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -103,7 +133,7 @@ const Signup = () => {
           </div>
 
           <button type="submit" disabled={loading} className="auth-button">
-            {loading ? "Creating Account..." : "Sign Up"}
+            {loading ? "Creating Account..." : "Sign Up with Email"}
           </button>
         </form>
 

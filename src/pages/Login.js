@@ -9,7 +9,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, loginWithGoogle } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,12 +29,42 @@ const Login = () => {
     setLoading(false);
   };
 
+  const handleGoogleSignIn = async () => {
+    try {
+      setError("");
+      setLoading(true);
+      await loginWithGoogle();
+      navigate("/");
+    } catch (err) {
+      setError("Failed to sign in with Google: " + err.message);
+      console.error(err);
+    }
+    setLoading(false);
+  };
+
   return (
     <div className="auth-container">
       <div className="auth-card">
         <h2>Login to StoryTeller</h2>
 
         {error && <div className="auth-error">{error}</div>}
+
+        {/* Social Sign-In Options */}
+        <div className="social-auth">
+          <button
+            type="button"
+            onClick={handleGoogleSignIn}
+            disabled={loading}
+            className="social-auth-button google-auth"
+          >
+            <span className="social-icon">🌐</span>
+            Continue with Google
+          </button>
+        </div>
+
+        <div className="auth-divider">
+          <span>or</span>
+        </div>
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -60,7 +90,7 @@ const Login = () => {
           </div>
 
           <button type="submit" disabled={loading} className="auth-button">
-            {loading ? "Logging in..." : "Login"}
+            {loading ? "Logging in..." : "Login with Email"}
           </button>
         </form>
 

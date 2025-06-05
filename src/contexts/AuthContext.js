@@ -7,7 +7,7 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import { auth, db } from "../firebase/config";
+import { auth, db, signInWithGoogle } from "../firebase/config";
 
 // Create the authentication context
 const AuthContext = createContext();
@@ -31,6 +31,11 @@ export function AuthProvider({ children }) {
   // Log in function
   function login(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
+  }
+
+  // Social sign-in functions
+  function loginWithGoogle() {
+    return signInWithGoogle();
   }
 
   // Log out function
@@ -127,6 +132,7 @@ export function AuthProvider({ children }) {
     userProfile,
     signup,
     login,
+    loginWithGoogle,
     logout,
     resetPassword,
     updateProfile,
