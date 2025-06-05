@@ -8,6 +8,7 @@ const Home = () => {
   const navigate = useNavigate();
   const [apiStatus, setApiStatus] = useState({ checked: false, online: false });
   const [error, setError] = useState("");
+  const [showDemo, setShowDemo] = useState(false);
 
   useEffect(() => {
     const checkApiStatus = async () => {
@@ -58,7 +59,7 @@ const Home = () => {
               disabled={!apiStatus.online}
             >
               <span className="btn-icon">✨</span>
-              Create New Story
+              Start Your Adventure
             </button>
             <button
               className="btn btn-secondary btn-large"
@@ -68,6 +69,15 @@ const Home = () => {
               <span className="btn-icon">📚</span>
               My Stories
             </button>
+          </div>
+
+          <div className="try-demo-section">
+            <p className="demo-text">
+              New to interactive storytelling?{" "}
+              <span className="demo-link" onClick={() => setShowDemo(true)}>
+                Try a demo story
+              </span>
+            </p>
           </div>
         </div>
       </div>
@@ -89,6 +99,51 @@ const Home = () => {
           <pre>python storyteller-python/api_server.py</pre>
         </div>
       )}
+
+      <section className="how-it-works-section">
+        <div className="section-header">
+          <h2>How It Works</h2>
+          <p>Create your personalized adventure in just a few steps</p>
+        </div>
+
+        <div className="steps-grid">
+          <div className="step-card">
+            <div className="step-number">1</div>
+            <h3>Create Your Character</h3>
+            <p>
+              Choose your character's name, gender, and background story. Pick
+              from various settings like fantasy, sci-fi, or romance.
+            </p>
+          </div>
+
+          <div className="step-card">
+            <div className="step-number">2</div>
+            <h3>AI Generates Your Story</h3>
+            <p>
+              Our advanced AI creates a unique opening chapter tailored to your
+              character and chosen setting.
+            </p>
+          </div>
+
+          <div className="step-card">
+            <div className="step-number">3</div>
+            <h3>Make Your Choices</h3>
+            <p>
+              At each turn, choose from multiple options that shape your story's
+              direction and your character's fate.
+            </p>
+          </div>
+
+          <div className="step-card">
+            <div className="step-number">4</div>
+            <h3>Share Your Adventure</h3>
+            <p>
+              Share your completed stories with friends on social media and
+              inspire others to create their own adventures.
+            </p>
+          </div>
+        </div>
+      </section>
 
       <section className="features-section">
         <div className="features-header">
@@ -142,6 +197,86 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Demo Modal */}
+      {showDemo && (
+        <div className="modal-overlay" onClick={() => setShowDemo(false)}>
+          <div className="demo-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="demo-header">
+              <h3>Try StoryTeller - Demo Story</h3>
+              <button
+                className="modal-close"
+                onClick={() => setShowDemo(false)}
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="demo-content">
+              <div className="demo-story-info">
+                <h4>"Elena's Magical Academy Adventure"</h4>
+                <p>
+                  <strong>Character:</strong> Elena
+                </p>
+                <p>
+                  <strong>Setting:</strong> Magical Academy
+                </p>
+                <p>
+                  <strong>Progress:</strong> First Year Student
+                </p>
+              </div>
+
+              <div className="demo-story-text">
+                <p>
+                  The ancient towers of Mystweave Academy pierce the morning
+                  mist as you, Elena, approach the grand gates for the first
+                  time. Your acceptance letter crinkles in your nervous grip as
+                  other new students file past, some floating their luggage with
+                  casual magic while others, like you, carry everything by hand.
+                </p>
+                <p>
+                  The sorting ceremony awaits, and you've heard whispers that
+                  your house placement will determine not just your dormitory,
+                  but your entire magical education path...
+                </p>
+              </div>
+
+              <div className="demo-choices">
+                <h5>What do you do?</h5>
+                <div className="demo-choice-buttons">
+                  <button className="demo-choice">
+                    Approach the confident-looking group of students discussing
+                    magical theory
+                  </button>
+                  <button className="demo-choice">
+                    Find a quiet spot to observe and learn from watching others
+                  </button>
+                  <button className="demo-choice">
+                    Boldly walk up to the main entrance, ready to face whatever
+                    comes
+                  </button>
+                </div>
+              </div>
+
+              <div className="demo-footer">
+                <p>
+                  This is just a preview! Create your account to start your own
+                  personalized adventure.
+                </p>
+                <button
+                  className="btn btn-accent"
+                  onClick={() => {
+                    setShowDemo(false);
+                    navigate("/signup");
+                  }}
+                >
+                  Start My Adventure
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

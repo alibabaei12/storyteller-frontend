@@ -135,7 +135,7 @@ const StoryTimeline = () => {
           </p>
           {story.cultivation_stage && (
             <p>
-              <strong>Cultivation Stage:</strong> {story.cultivation_stage}
+              <strong>Progress Level:</strong> {story.cultivation_stage}
             </p>
           )}
         </div>

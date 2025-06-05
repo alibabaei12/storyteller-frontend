@@ -196,7 +196,7 @@ Create your own adventure: ${getShareUrl(selectedStory.id)}
                   </p>
                   {story.cultivation_stage && (
                     <p>
-                      <strong>Cultivation:</strong> {story.cultivation_stage}
+                      <strong>Progress:</strong> {story.cultivation_stage}
                     </p>
                   )}
                   <p className="story-date">

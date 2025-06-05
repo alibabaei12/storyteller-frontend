@@ -267,7 +267,7 @@ const StoryPage = () => {
                 </span>
                 {story.cultivation_stage && (
                   <span className="info-badge">
-                    <span className="badge-icon">⚡</span>
+                    <span className="badge-icon">📈</span>
                     {story.cultivation_stage}
                   </span>
                 )}
