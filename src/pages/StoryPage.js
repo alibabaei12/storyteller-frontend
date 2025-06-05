@@ -80,15 +80,23 @@ const StoryPage = () => {
       setUsageLimit(false);
 
       // Make the choice
-      const updatedStory = await apiService.makeChoice(storyId, choiceId);
-      setStory(updatedStory);
+      const result = await apiService.makeChoice(storyId, choiceId);
+
+      // Check if result is an error object (from our API service)
+      if (result instanceof Error) {
+        throw result;
+      }
+
+      setStory(result);
     } catch (error) {
       console.error("Error making choice:", error);
 
       // Check if this is a usage limit error
       if (
-        error.message.includes("limit") ||
-        error.message.includes("reached")
+        error.message &&
+        (error.message.includes("limit") ||
+          error.message.includes("reached") ||
+          error.message.includes("429"))
       ) {
         setUsageLimit(true);
         setError(error.message);
@@ -163,8 +171,20 @@ const StoryPage = () => {
     );
   }
 
-  // Get current node
-  const currentNode = story.nodes[story.current_node_id];
+  // Get current node safely
+  const currentNode = story?.nodes?.[story.current_node_id];
+
+  // If currentNode is not available, something is wrong with the story structure
+  if (!currentNode) {
+    return (
+      <div className="story-error">
+        <div className="error">Story data is corrupted or incomplete.</div>
+        <button className="btn" onClick={handleBack}>
+          Back to Stories
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className={`story-page ${isReading ? "reading-mode-active" : ""}`}>

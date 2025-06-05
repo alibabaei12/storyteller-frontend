@@ -194,7 +194,7 @@ export const apiService = {
       return handleResponse(response);
     } catch (error) {
       console.error("Make Choice Error:", error);
-      return error; // Pass the error through instead of creating a generic one
+      throw error; // Throw the error instead of returning it
     }
   },
 
