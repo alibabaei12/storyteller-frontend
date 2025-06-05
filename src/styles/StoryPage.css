@@ -79,4 +79,32 @@
   margin-bottom: 20px;
   font-size: 0.95rem;
   color: #666;
+}
+
+/* Story Controls */
+.story-controls {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.timeline-button {
+  background-color: var(--accent-color, #e74c3c);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius, 8px);
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition, all 0.2s ease);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timeline-button:hover {
+  background-color: var(--accent-dark, #c0392b);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
 } 

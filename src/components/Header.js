@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import ThemeToggle from "./ThemeToggle";
 import "../styles/Header.css";
 
 const Header = () => {
@@ -80,6 +81,7 @@ const Header = () => {
               <button onClick={() => navigate("/stories")} className="nav-btn">
                 My Stories
               </button>
+              <ThemeToggle />
               <div className="user-profile-menu" ref={dropdownRef}>
                 <button
                   className="profile-button"
@@ -128,6 +130,7 @@ const Header = () => {
               <button onClick={() => navigate("/signup")} className="nav-btn">
                 Sign Up
               </button>
+              <ThemeToggle />
             </>
           )}
         </nav>

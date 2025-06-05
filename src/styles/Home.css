@@ -1,82 +1,312 @@
-.welcome-card {
+/* Hero Section */
+.hero-section {
   text-align: center;
-  padding: 30px;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  border-radius: 20px;
+  margin-bottom: 60px;
+  color: var(--text-on-primary);
+  position: relative;
+  overflow: hidden;
 }
 
-.welcome-card h2 {
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+.logo-container {
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.app-logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.app-logo:hover {
+  transform: scale(1.05);
+}
+
+.welcome-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
   margin-bottom: 20px;
-  color: var(--primary-color);
+  background: linear-gradient(45deg, #ffffff, #f0f0f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.welcome-card p {
+.hero-subtitle {
+  font-size: 1.3rem;
   margin-bottom: 15px;
+  opacity: 0.95;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.hero-description {
   font-size: 1.1rem;
+  margin-bottom: 40px;
+  opacity: 0.9;
+  font-style: italic;
 }
 
 .action-buttons {
   display: flex;
-  gap: 15px;
-  justify-content: center;
-  margin-top: 30px;
-}
-
-.features-card {
-  margin-top: 30px;
-}
-
-.features-card h3 {
-  margin-bottom: 20px;
-  color: var(--primary-color);
-}
-
-.features-list {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.features-list li {
+.btn-large {
+  padding: 16px 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 12px;
   display: flex;
-  align-items: flex-start;
-  gap: 15px;
+  align-items: center;
+  gap: 8px;
+  min-width: 180px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.btn-large:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--text-on-primary);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Features Section */
+.features-section {
+  margin-top: 60px;
+}
+
+.features-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.features-header h2 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.features-header p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.feature-card {
+  background: var(--card-color);
+  padding: 40px 30px;
+  border-radius: 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.feature-card:hover::before {
+  opacity: 1;
+}
+
+.feature-icon-container {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-light), var(--accent-color));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 25px;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover .feature-icon-container {
+  transform: scale(1.1);
 }
 
 .feature-icon {
-  font-size: 2rem;
+  font-size: 2.2rem;
 }
 
-.features-list h4 {
-  margin-bottom: 5px;
-  color: var(--primary-dark);
+.feature-card h3 {
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  margin-bottom: 15px;
+  font-weight: 600;
 }
 
+.feature-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* API Status */
 .api-status-card {
-  margin-top: 20px;
-  background-color: #fff9c4;
-  border-left: 4px solid #fbc02d;
+  margin-top: 40px;
+  background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+  border: none;
+  border-left: 6px solid #f39c12;
+  border-radius: 12px;
+  padding: 25px;
 }
 
 .api-status-card h3 {
-  color: #f57f17;
+  color: #e67e22;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.api-status-card p {
+  color: #8b4513;
   margin-bottom: 10px;
 }
 
 .api-status-card pre {
-  background-color: #333;
-  color: white;
-  padding: 10px;
-  border-radius: 4px;
+  background: var(--card-color);
+  color: var(--text-primary);
+  padding: 15px;
+  border-radius: 8px;
   overflow-x: auto;
-  margin-top: 10px;
+  margin-top: 15px;
+  border: 1px solid var(--border-color);
+  font-family: 'Courier New', monospace;
 }
 
+/* Loading */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-  .action-buttons {
-    flex-direction: column;
+  .hero-section {
+    padding: 40px 20px;
+    margin-bottom: 40px;
   }
   
-  .features-list {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .app-logo {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn-large {
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .features-header h2 {
+    font-size: 2rem;
+  }
+  
+  .features-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .feature-card {
+    padding: 30px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.8rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .features-header h2 {
+    font-size: 1.7rem;
+  }
+  
+  .app-logo {
+    width: 80px;
+    height: 80px;
   }
 } 

@@ -49,8 +49,16 @@
 
 .story-card-actions {
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-top: 15px;
+}
+
+.story-card-actions .btn {
+  flex: 1;
+  min-width: 80px;
+  font-size: 0.9rem;
+  padding: 8px 12px;
 }
 
 .btn-delete {
@@ -80,6 +88,15 @@
 @media (max-width: 768px) {
   .stories-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .story-card-actions {
+    flex-direction: column;
+  }
+  
+  .story-card-actions .btn {
+    flex: none;
+    width: 100%;
   }
   
   .page-actions {

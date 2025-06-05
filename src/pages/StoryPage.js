@@ -71,6 +71,11 @@ const StoryPage = () => {
     navigate("/stories");
   };
 
+  // View story timeline
+  const handleViewTimeline = () => {
+    navigate(`/story/${storyId}/timeline`);
+  };
+
   if (loading) {
     return (
       <div className="loading">
@@ -117,6 +122,12 @@ const StoryPage = () => {
               Cultivation: {story.cultivation_stage}
             </span>
           )}
+        </div>
+
+        <div className="story-controls">
+          <button onClick={handleViewTimeline} className="timeline-button">
+            📖 View Timeline
+          </button>
         </div>
 
         <div className="story-content">{currentNode.content}</div>

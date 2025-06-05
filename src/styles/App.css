@@ -88,19 +88,39 @@ label {
   font-weight: 500;
 }
 
-input, select {
+input, select, textarea {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   font-size: 1rem;
+  background-color: var(--card-color);
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.1);
 }
 
 .story-content {
   margin-bottom: 20px;
   white-space: pre-wrap;
-  line-height: 1.8;
+  line-height: 1.6;
   font-size: 1.1rem;
+  font-family: var(--font-story);
+  max-width: 65ch; /* 65 characters per line for optimal readability */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .story-content {
+    font-size: 1.2rem;
+    line-height: 1.7;
+  }
 }
 
 .choices {

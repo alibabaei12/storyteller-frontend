@@ -34,6 +34,11 @@ const StoriesList = () => {
     navigate(`/story/${storyId}`);
   };
 
+  // Handle viewing story timeline
+  const handleViewTimeline = (storyId) => {
+    navigate(`/story/${storyId}/timeline`);
+  };
+
   // Handle deleting a story
   const handleDeleteStory = async (storyId) => {
     if (!window.confirm("Are you sure you want to delete this story?")) {
@@ -113,6 +118,12 @@ const StoriesList = () => {
                   onClick={() => handleContinueStory(story.id)}
                 >
                   Continue
+                </button>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => handleViewTimeline(story.id)}
+                >
+                  📖 Timeline
                 </button>
                 <button
                   className="btn btn-delete"
