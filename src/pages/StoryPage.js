@@ -13,6 +13,8 @@ const StoryPage = () => {
   const [usageLimit, setUsageLimit] = useState(false);
   const [isReading, setIsReading] = useState(false);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
+  const [headerVisible, setHeaderVisible] = useState(true);
+  const [headerCompact, setHeaderCompact] = useState(false);
   const storyContentRef = useRef(null);
   const newContentRef = useRef(null);
 
@@ -39,6 +41,8 @@ const StoryPage = () => {
 
   // Handle scroll detection for reading mode and scroll-to-top button
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
@@ -46,11 +50,31 @@ const StoryPage = () => {
       // Show scroll to top button when scrolled down
       setShowScrollToTop(scrollY > windowHeight * 0.5);
 
+      // Hide header when scrolling down, show when scrolling up or at top
+      if (scrollY > 150) {
+        // Only hide header if we've scrolled past the initial header area
+        if (scrollY > lastScrollY) {
+          // Scrolling down - hide header completely
+          setHeaderVisible(false);
+          setHeaderCompact(false);
+        } else {
+          // Scrolling up - show compact header
+          setHeaderVisible(true);
+          setHeaderCompact(true);
+        }
+      } else {
+        // Near the top - always show full header
+        setHeaderVisible(true);
+        setHeaderCompact(false);
+      }
+
       // Enter reading mode when scrolled past header
       if (storyContentRef.current) {
         const storyRect = storyContentRef.current.getBoundingClientRect();
         setIsReading(storyRect.top < 100 && storyRect.bottom > 200);
       }
+
+      lastScrollY = scrollY;
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -210,34 +234,58 @@ const StoryPage = () => {
       </div>
 
       <div className="story-container">
-        <div className="story-header">
-          <h1 className="story-title">{story.title}</h1>
+        <div
+          className={`story-header ${
+            !headerVisible ? "story-header-hidden" : ""
+          } ${headerCompact ? "story-header-compact" : ""}`}
+        >
+          {headerCompact ? (
+            // Compact header for when scrolling
+            <div className="compact-header">
+              <h2 className="compact-title">
+                {story.character_name}'s Journey
+              </h2>
+              <div className="compact-controls">
+                <button onClick={handleBack} className="compact-back-btn">
+                  ← Back
+                </button>
+              </div>
+            </div>
+          ) : (
+            // Full header for when at top
+            <>
+              <h1 className="story-title">{story.title}</h1>
 
-          <div className="character-info">
-            <span className="info-badge">
-              <span className="badge-icon">👤</span>
-              {story.character_name}
-            </span>
-            <span className="info-badge">
-              <span className="badge-icon">🌍</span>
-              {story.setting}
-            </span>
-            {story.cultivation_stage && (
-              <span className="info-badge">
-                <span className="badge-icon">⚡</span>
-                {story.cultivation_stage}
-              </span>
-            )}
-          </div>
+              <div className="character-info">
+                <span className="info-badge">
+                  <span className="badge-icon">👤</span>
+                  {story.character_name}
+                </span>
+                <span className="info-badge">
+                  <span className="badge-icon">🌍</span>
+                  {story.setting}
+                </span>
+                {story.cultivation_stage && (
+                  <span className="info-badge">
+                    <span className="badge-icon">⚡</span>
+                    {story.cultivation_stage}
+                  </span>
+                )}
+              </div>
 
-          <div className="story-controls">
-            <button onClick={handleViewTimeline} className="timeline-button">
-              📖 View Timeline
-            </button>
-            <button onClick={handleBack} className="back-button">
-              ← Back to Stories
-            </button>
-          </div>
+              <div className="story-controls">
+                <button
+                  onClick={handleViewTimeline}
+                  className="timeline-button"
+                >
+                  📖 View Timeline
+                </button>
+                <button onClick={handleBack} className="back-button">
+                  ← Back to Stories
+                </button>
+              </div>
+            </>
+          )}
         </div>
 
         <div className="story-content-wrapper">
