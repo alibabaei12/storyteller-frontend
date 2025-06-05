@@ -11,7 +11,7 @@
 
 .progress-bar {
   height: 8px;
-  background-color: #f0f0f0;
+  background-color: var(--border-color);
   border-radius: 4px;
   margin-bottom: 15px;
   overflow: hidden;
@@ -39,7 +39,7 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: #f0f0f0;
+  background-color: var(--border-color);
   color: var(--text-secondary);
   display: flex;
   align-items: center;
@@ -117,8 +117,8 @@
 .origin-card,
 .tone-card,
 .power-card {
-  background-color: #fff;
-  border: 2px solid #eee;
+  background-color: var(--card-color);
+  border: 2px solid var(--border-color);
   border-radius: var(--border-radius);
   padding: 15px;
   cursor: pointer;
@@ -131,16 +131,17 @@
 .tone-card:hover,
 .power-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  border-color: var(--accent-light);
+  box-shadow: var(--box-shadow);
+  border-color: var(--primary-light);
 }
 
 .setting-card.selected,
 .origin-card.selected,
 .tone-card.selected,
 .power-card.selected {
-  border-color: var(--accent-color);
-  background-color: var(--accent-light);
+  border-color: var(--primary-color);
+  background-color: var(--primary-light);
+  color: var(--text-on-primary);
 }
 
 .setting-icon,
@@ -190,14 +191,16 @@
 .character-name-section input {
   width: 100%;
   padding: 12px;
-  border: 2px solid #eee;
+  border: 2px solid var(--border-color);
   border-radius: var(--border-radius);
   font-size: 1rem;
+  background-color: var(--card-color);
+  color: var(--text-primary);
   transition: var(--transition);
 }
 
 .character-name-section input:focus {
-  border-color: var(--accent-color);
+  border-color: var(--primary-color);
   outline: none;
 }
 
@@ -233,8 +236,8 @@
 .gender-option {
   display: flex;
   align-items: center;
-  background-color: #fff;
-  border: 2px solid #eee;
+  background-color: var(--card-color);
+  border: 2px solid var(--border-color);
   border-radius: var(--border-radius);
   padding: 10px 15px;
   cursor: pointer;
@@ -243,13 +246,14 @@
 
 .gender-option:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border-color: var(--accent-light);
+  box-shadow: var(--box-shadow);
+  border-color: var(--primary-light);
 }
 
 .gender-option.selected {
-  border-color: var(--accent-color);
-  background-color: var(--accent-light);
+  border-color: var(--primary-color);
+  background-color: var(--primary-light);
+  color: var(--text-on-primary);
 }
 
 .gender-icon {
@@ -273,8 +277,8 @@
 .length-option {
   display: flex;
   align-items: center;
-  background-color: #fff;
-  border: 2px solid #eee;
+  background-color: var(--card-color);
+  border: 2px solid var(--border-color);
   border-radius: var(--border-radius);
   padding: 12px 15px;
   cursor: pointer;
@@ -283,13 +287,14 @@
 
 .length-option:hover {
   transform: translateX(3px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border-color: var(--accent-light);
+  box-shadow: var(--box-shadow);
+  border-color: var(--primary-light);
 }
 
 .length-option.selected {
-  border-color: var(--accent-color);
-  background-color: var(--accent-light);
+  border-color: var(--primary-color);
+  background-color: var(--primary-light);
+  color: var(--text-on-primary);
 }
 
 .length-icon {
@@ -324,17 +329,17 @@
 
 /* Review Card */
 .review-card {
-  background-color: #fff;
+  background-color: var(--card-color);
   border-radius: var(--border-radius);
   padding: 20px;
   margin-bottom: 20px;
-  border: 1px solid #eee;
+  border: 1px solid var(--border-color);
 }
 
 .review-section {
   margin-bottom: 20px;
   padding-bottom: 15px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .review-section:last-child {
@@ -349,10 +354,12 @@
 }
 
 .review-message {
-  background-color: var(--accent-light);
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
   padding: 15px;
   border-radius: var(--border-radius);
   margin-bottom: 20px;
+  color: var(--text-primary);
 }
 
 .loading-indicator {
