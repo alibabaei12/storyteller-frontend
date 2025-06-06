@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiService } from "../services/apiService";
+import { auth } from "../firebase/config";
 import "../styles/StoriesList.css";
 
 const StoriesList = () => {
@@ -67,6 +68,11 @@ const StoriesList = () => {
 
   // Share functions
   const openShareModal = (story) => {
+    // Check if user is authenticated before allowing sharing
+    if (!auth.currentUser) {
+      alert("Please sign in to share your stories.");
+      return;
+    }
     setSelectedStory(story);
     setShareModalOpen(true);
   };
@@ -76,84 +82,110 @@ const StoriesList = () => {
     setSelectedStory(null);
   };
 
-  const getShareUrl = (storyId) => {
-    return `${window.location.origin}/story/${storyId}`;
+  const getShareUrl = async (storyId) => {
+    try {
+      // Generate share token for the story
+      const response = await apiService.generateShareToken(storyId);
+      return response.share_url;
+    } catch (error) {
+      console.error("Error generating share URL:", error);
+      // Show error and don't return a fallback URL
+      throw error;
+    }
   };
 
   const getShareText = (story) => {
     return `🌟 Check out my ${story.setting} adventure as ${story.character_name} on @StoryTellerAI! Create your own AI-powered interactive story at`;
   };
 
-  const shareToTwitter = () => {
+  const shareToTwitter = async () => {
     if (!selectedStory) return;
-    const url = getShareUrl(selectedStory.id);
-    const text = getShareText(selectedStory);
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-      text
-    )}&url=${encodeURIComponent(url)}`;
-    window.open(twitterUrl, "_blank", "width=550,height=420");
-    closeShareModal();
+    try {
+      const url = await getShareUrl(selectedStory.id);
+      const text = getShareText(selectedStory);
+      const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+        text
+      )}&url=${encodeURIComponent(url)}`;
+      window.open(twitterUrl, "_blank", "width=550,height=420");
+      closeShareModal();
+    } catch (error) {
+      alert(`Failed to share to Twitter: ${error.message}`);
+    }
   };
 
-  const shareToReddit = () => {
+  const shareToReddit = async () => {
     if (!selectedStory) return;
-    const url = getShareUrl(selectedStory.id);
-    const title = `${selectedStory.character_name}'s ${selectedStory.setting} Adventure - AI-Generated Interactive Story`;
-    const redditUrl = `https://reddit.com/submit?url=${encodeURIComponent(
-      url
-    )}&title=${encodeURIComponent(title)}`;
-    window.open(redditUrl, "_blank");
-    closeShareModal();
+    try {
+      const url = await getShareUrl(selectedStory.id);
+      const title = `${selectedStory.character_name}'s ${selectedStory.setting} Adventure - AI-Generated Interactive Story`;
+      const redditUrl = `https://reddit.com/submit?url=${encodeURIComponent(
+        url
+      )}&title=${encodeURIComponent(title)}`;
+      window.open(redditUrl, "_blank");
+      closeShareModal();
+    } catch (error) {
+      alert(`Failed to share to Reddit: ${error.message}`);
+    }
   };
 
   const shareToInstagram = async () => {
     if (!selectedStory) return;
-    const instagramText = `🌟 Just created an epic ${
-      selectedStory.setting
-    } adventure as ${selectedStory.character_name}! ⚔️✨
+    try {
+      const url = await getShareUrl(selectedStory.id);
+      const instagramText = `🌟 Just created an epic ${selectedStory.setting} adventure as ${selectedStory.character_name}! ⚔️✨
 
 AI-powered interactive storytelling where YOUR choices shape the story! 🎮📚
 
-Create your own adventure: ${getShareUrl(selectedStory.id)}
+Create your own adventure: ${url}
 
 #StoryTelling #AIStory #InteractiveStory #Adventure #Gaming`;
 
-    try {
-      await navigator.clipboard.writeText(instagramText);
-      alert(
-        "Instagram story text copied! Open Instagram and paste in your story."
-      );
-    } catch (err) {
-      console.error("Failed to copy: ", err);
-      const textArea = document.createElement("textarea");
-      textArea.value = instagramText;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textArea);
-      alert(
-        "Instagram story text copied! Open Instagram and paste in your story."
-      );
+      try {
+        await navigator.clipboard.writeText(instagramText);
+        alert(
+          "Instagram story text copied! Open Instagram and paste in your story."
+        );
+      } catch (err) {
+        console.error("Failed to copy: ", err);
+        const textArea = document.createElement("textarea");
+        textArea.value = instagramText;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+        alert(
+          "Instagram story text copied! Open Instagram and paste in your story."
+        );
+      }
+      closeShareModal();
+    } catch (error) {
+      alert(`Failed to prepare Instagram share: ${error.message}`);
     }
-    closeShareModal();
   };
 
   const copyShareLink = async () => {
     if (!selectedStory) return;
     try {
-      await navigator.clipboard.writeText(getShareUrl(selectedStory.id));
-      alert("Link copied to clipboard!");
-    } catch (err) {
-      console.error("Failed to copy: ", err);
-      const textArea = document.createElement("textarea");
-      textArea.value = getShareUrl(selectedStory.id);
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textArea);
-      alert("Link copied to clipboard!");
+      const url = await getShareUrl(selectedStory.id);
+
+      // Try to copy to clipboard
+      try {
+        await navigator.clipboard.writeText(url);
+        alert("Share link copied to clipboard!");
+      } catch (copyErr) {
+        // Fallback to older method for clipboard copy
+        const textArea = document.createElement("textarea");
+        textArea.value = url;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+        alert("Share link copied to clipboard!");
+      }
+      closeShareModal();
+    } catch (error) {
+      alert(`Failed to generate share link: ${error.message}`);
     }
-    closeShareModal();
   };
 
   if (loading) {

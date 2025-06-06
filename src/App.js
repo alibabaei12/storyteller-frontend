@@ -6,6 +6,7 @@ import NewStory from "./pages/NewStory";
 import StoryPage from "./pages/StoryPage";
 import StoriesList from "./pages/StoriesList";
 import StoryTimeline from "./pages/StoryTimeline";
+import SharedStoryViewer from "./pages/SharedStoryViewer";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -29,6 +30,10 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route
+                  path="/share/:shareToken"
+                  element={<SharedStoryViewer />}
+                />
 
                 {/* Protected Routes */}
                 <Route

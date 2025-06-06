@@ -1,14 +1,12 @@
 // API service for StoryTeller
 import { auth } from "../firebase/config";
 
-// For production, use the environment variable
-// For local development, use localhost with correct port
-// For the deployed backend use this as fallback
+// Base URL for the backend server (without /api path)
 const API_BASE_URL =
   process.env.REACT_APP_API_URL ||
   (window.location.hostname === "localhost"
-    ? "http://localhost:5001/api"
-    : "https://storyteller-backend-liry.onrender.com/api");
+    ? "http://localhost:5001"
+    : "https://storyteller-backend-liry.onrender.com");
 
 console.log("Using API URL:", API_BASE_URL);
 
@@ -188,7 +186,7 @@ export const apiService = {
       const options = await createFetchOptions();
       console.log("Checking API status...");
       const response = await fetchWithTimeout(
-        `${API_BASE_URL}/status`,
+        `${API_BASE_URL}/api/status`,
         options
       );
       return handleResponse(response);
@@ -206,7 +204,7 @@ export const apiService = {
       const options = await createFetchOptions();
       console.log("Getting all stories...");
       const response = await fetchWithTimeout(
-        `${API_BASE_URL}/stories`,
+        `${API_BASE_URL}/api/stories`,
         options
       );
       return handleResponse(response);
@@ -222,7 +220,7 @@ export const apiService = {
       const options = await createFetchOptions();
       console.log(`Getting story ${storyId}...`);
       const response = await fetchWithTimeout(
-        `${API_BASE_URL}/stories/${storyId}`,
+        `${API_BASE_URL}/api/stories/${storyId}`,
         options
       );
       return handleResponse(response);
@@ -238,7 +236,7 @@ export const apiService = {
       const options = await createFetchOptions("DELETE");
       console.log(`Deleting story ${storyId}...`);
       const response = await fetchWithTimeout(
-        `${API_BASE_URL}/stories/${storyId}`,
+        `${API_BASE_URL}/api/stories/${storyId}`,
         options
       );
       return handleResponse(response);
@@ -255,7 +253,7 @@ export const apiService = {
       // Use 60 second timeout for initial story generation
       const options = await createFetchOptions("POST", storyParams, 60000);
       const response = await fetchWithTimeout(
-        `${API_BASE_URL}/stories`,
+        `${API_BASE_URL}/api/stories`,
         options
       );
       return handleResponse(response);
@@ -273,7 +271,7 @@ export const apiService = {
       // Use 60 second timeout for AI generation
       const options = await createFetchOptions("POST", null, 60000);
       const response = await fetchWithTimeout(
-        `${API_BASE_URL}/stories/${storyId}/choices/${choiceId}`,
+        `${API_BASE_URL}/api/stories/${storyId}/choices/${choiceId}`,
         options
       );
       return handleResponse(response);
@@ -288,7 +286,10 @@ export const apiService = {
     try {
       const options = await createFetchOptions();
       console.log("Getting user usage statistics...");
-      const response = await fetchWithTimeout(`${API_BASE_URL}/usage`, options);
+      const response = await fetchWithTimeout(
+        `${API_BASE_URL}/api/usage`,
+        options
+      );
       return handleResponse(response);
     } catch (error) {
       console.error("Get Usage Error:", error);
@@ -296,19 +297,17 @@ export const apiService = {
     }
   },
 
-  // Fix usage count
-  fixUsage: async () => {
+  // Generate share token for a story
+  generateShareToken: async (storyId) => {
     try {
       const options = await createFetchOptions("POST");
-      console.log("Fixing usage count...");
-      const response = await fetchWithTimeout(
-        `${API_BASE_URL}/usage/fix`,
-        options
-      );
+      const url = `${API_BASE_URL}/api/stories/${storyId}/share`;
+      console.log(`Generating share token for story ${storyId}...`);
+      const response = await fetchWithTimeout(url, options);
       return handleResponse(response);
     } catch (error) {
-      console.error("Fix Usage Error:", error);
-      throw new Error(`Failed to fix usage: ${error.message}`);
+      console.error("Generate Share Token Error:", error);
+      throw new Error(`Failed to generate share token: ${error.message}`);
     }
   },
 };
