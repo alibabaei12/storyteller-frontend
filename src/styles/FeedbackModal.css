@@ -1,0 +1,233 @@
+.feedback-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.feedback-modal {
+  background-color: var(--card-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  margin: 20px;
+}
+
+.feedback-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px 0;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 20px;
+}
+
+.feedback-header h3 {
+  margin: 0;
+  color: var(--primary-color);
+  font-size: 1.3rem;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: 5px;
+  line-height: 1;
+  transition: var(--transition);
+}
+
+.close-button:hover {
+  color: var(--text-primary);
+}
+
+.feedback-form {
+  padding: 0 20px 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.required {
+  color: #ff6b6b;
+}
+
+.optional {
+  color: var(--text-secondary);
+  font-weight: normal;
+  font-size: 0.9rem;
+}
+
+.feedback-select,
+.feedback-input,
+.feedback-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  background-color: var(--background-color);
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+
+.feedback-select:focus,
+.feedback-input:focus,
+.feedback-textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.feedback-textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+}
+
+.char-count {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-align: right;
+  margin-top: 5px;
+}
+
+.feedback-status {
+  padding: 12px;
+  border-radius: var(--border-radius);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.feedback-status.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.feedback-status.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.feedback-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.feedback-actions .btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.feedback-actions .btn.primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.feedback-actions .btn.primary:hover:not(:disabled) {
+  background-color: var(--primary-dark);
+}
+
+.feedback-actions .btn.primary:disabled {
+  background-color: var(--border-color);
+  color: var(--text-secondary);
+  cursor: not-allowed;
+}
+
+.feedback-actions .btn.secondary {
+  background-color: var(--card-color);
+  color: var(--text-primary);
+  border: 2px solid var(--border-color);
+}
+
+.feedback-actions .btn.secondary:hover {
+  border-color: var(--primary-light);
+  background-color: var(--background-color);
+}
+
+.feedback-info {
+  background-color: var(--background-color);
+  padding: 15px;
+  margin: 0 20px 20px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+}
+
+.feedback-info p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.feedback-info strong {
+  color: var(--text-primary);
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .feedback-status.success {
+    background-color: #1e4620;
+    color: #a7d3a9;
+    border-color: #2d5a2f;
+  }
+
+  .feedback-status.error {
+    background-color: #4a1e1e;
+    color: #e8a1a1;
+    border-color: #5a2d2d;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .feedback-modal {
+    width: 95%;
+    margin: 10px;
+  }
+
+  .feedback-header {
+    padding: 15px 15px 0;
+  }
+
+  .feedback-form {
+    padding: 0 15px 15px;
+  }
+
+  .feedback-info {
+    margin: 0 15px 15px;
+  }
+
+  .feedback-actions {
+    flex-direction: column-reverse;
+  }
+
+  .feedback-actions .btn {
+    width: 100%;
+  }
+} 

@@ -26,9 +26,21 @@
 
 .header-nav {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
+}
+
+.nav-primary {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nav-secondary {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .nav-btn {
@@ -43,6 +55,17 @@
 
 .nav-btn:hover {
   background-color: var(--primary-light);
+}
+
+.nav-btn.primary-action {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+}
+
+.nav-btn.primary-action:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
 }
 
 /* User Profile Menu */
