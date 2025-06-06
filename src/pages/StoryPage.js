@@ -95,6 +95,8 @@ const StoryPage = () => {
   }, [story?.current_node_id, makingChoice]);
 
   // Handle making a choice
+  const [retryCount, setRetryCount] = useState(0);
+
   const handleChoice = async (choiceId) => {
     if (makingChoice) return;
 
@@ -112,6 +114,7 @@ const StoryPage = () => {
       }
 
       setStory(result);
+      setRetryCount(0); // Reset retry count on success
     } catch (error) {
       console.error("Error making choice:", error);
 
@@ -125,11 +128,46 @@ const StoryPage = () => {
         setUsageLimit(true);
         setError(error.message);
       } else {
-        setError("Failed to process your choice. Please try again.");
+        // Enhanced error messages based on error type
+        let errorMessage = "Failed to process your choice. Please try again.";
+
+        if (
+          error.message.includes("timeout") ||
+          error.message.includes("AI might be")
+        ) {
+          errorMessage =
+            error.message +
+            " This sometimes happens when creating an especially epic story!";
+        } else if (
+          error.message.includes("overwhelmed") ||
+          error.message.includes("busy")
+        ) {
+          errorMessage =
+            error.message + " The AI will be back to full power shortly.";
+        } else if (
+          error.message.includes("connection") ||
+          error.message.includes("internet")
+        ) {
+          errorMessage =
+            error.message + " Please ensure you're connected to the internet.";
+        } else if (
+          error.message.includes("server") ||
+          error.message.includes("AI")
+        ) {
+          errorMessage = error.message;
+        }
+
+        setError(errorMessage);
       }
     } finally {
       setMakingChoice(false);
     }
+  };
+
+  // Retry function for failed choices
+  const retryChoice = (choiceId) => {
+    setRetryCount((prev) => prev + 1);
+    handleChoice(choiceId);
   };
 
   // Scroll to top function
@@ -265,12 +303,21 @@ const StoryPage = () => {
                   <span className="badge-icon">🌍</span>
                   {story.setting}
                 </span>
-                {story.cultivation_stage && (
+                {story.tone && (
                   <span className="info-badge">
-                    <span className="badge-icon">📈</span>
-                    {story.cultivation_stage}
+                    <span className="badge-icon">🎭</span>
+                    {story.tone}
                   </span>
                 )}
+                {story.cultivation_stage &&
+                  !["romance", "mystery", "horror", "slice-of-life"].includes(
+                    story.setting
+                  ) && (
+                    <span className="info-badge">
+                      <span className="badge-icon">📈</span>
+                      {story.cultivation_stage}
+                    </span>
+                  )}
               </div>
 
               <div className="story-controls">
@@ -315,7 +362,42 @@ const StoryPage = () => {
               </div>
 
               <div className="choices-container">
-                {makingChoice ? (
+                {error && !usageLimit ? (
+                  <div className="choice-error">
+                    <div className="error-icon">⚠️</div>
+                    <h3 className="error-title">Oops! Something went wrong</h3>
+                    <p className="error-message">{error}</p>
+                    {retryCount < 3 && (
+                      <div className="error-actions">
+                        <p className="retry-hint">
+                          Don't worry - your progress is saved! Try again when
+                          you're ready.
+                        </p>
+                        <div className="retry-buttons">
+                          {currentNode.choices.map((choice, index) => (
+                            <button
+                              key={choice.id}
+                              className="btn btn-retry"
+                              onClick={() => retryChoice(choice.id)}
+                            >
+                              Retry: {choice.text}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    {retryCount >= 3 && (
+                      <div className="max-retries">
+                        <p>
+                          Having persistent issues? Your story is safely saved.
+                        </p>
+                        <button className="btn btn-accent" onClick={handleBack}>
+                          Return to Stories
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ) : makingChoice ? (
                   <div className="loading-choices">
                     <div className="loading-animation">
                       <div className="spinner"></div>
@@ -328,6 +410,7 @@ const StoryPage = () => {
                     <p className="loading-text">Weaving your story...</p>
                     <p className="loading-subtext">
                       The AI is crafting your next chapter
+                      {retryCount > 0 && ` (Attempt ${retryCount + 1})`}
                     </p>
                   </div>
                 ) : (

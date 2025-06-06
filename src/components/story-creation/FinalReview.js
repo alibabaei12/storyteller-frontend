@@ -31,16 +31,16 @@ const getOriginName = (originId) => {
 // Helper function to get readable names for tones
 const getToneName = (toneId) => {
   const toneMap = {
-    optimistic: "Optimistic",
-    tragic: "Tragic",
-    epic: "Epic",
-    thrilling: "Thrilling",
+    romantic: "Romance",
     mystery: "Mystery",
-    romantic: "Romantic",
-    dark: "Dark",
-    whimsical: "Whimsical",
-    gritty: "Gritty",
-    philosophical: "Philosophical",
+    adventure: "Adventure",
+    thriller: "Thriller",
+    comedy: "Comedy",
+    drama: "Drama",
+    horror: "Horror",
+    "slice-of-life": "Slice of Life",
+    epic: "Epic Fantasy",
+    philosophical: "Deep & Thoughtful",
   };
   return toneMap[toneId] || toneId;
 };
@@ -65,6 +65,16 @@ const getLengthName = (lengthId) => {
     infinite: "Infinite Adventure",
   };
   return lengthMap[lengthId] || lengthId;
+};
+
+// Helper function to get readable names for language complexity
+const getLanguageComplexityName = (complexityId) => {
+  const complexityMap = {
+    simple: "Simple & Clear",
+    moderate: "Moderate",
+    complex: "Literary",
+  };
+  return complexityMap[complexityId] || complexityId;
 };
 
 const FinalReview = ({ formData, prevStep, handleSubmit, loading }) => {
@@ -98,7 +108,11 @@ const FinalReview = ({ formData, prevStep, handleSubmit, loading }) => {
         <div className="review-section">
           <h4>Story Style</h4>
           <p>
-            <strong>Tone:</strong> {getToneName(formData.tone)}
+            <strong>Genre:</strong> {getToneName(formData.tone)}
+          </p>
+          <p>
+            <strong>Language:</strong>{" "}
+            {getLanguageComplexityName(formData.language_complexity)}
           </p>
           <p>
             <strong>Length:</strong> {getLengthName(formData.story_length)}

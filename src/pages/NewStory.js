@@ -19,9 +19,10 @@ const NewStory = () => {
     character_name: "",
     character_gender: "unspecified",
     setting: "",
-    tone: "balanced",
+    tone: "adventure",
     character_origin: "normal",
     story_length: "medium", // Default to medium length stories
+    language_complexity: "simple", // Default to simple/accessible language
   });
 
   // Update form data
@@ -89,6 +90,7 @@ const NewStory = () => {
             setting={formData.setting}
             tone={formData.tone}
             storyLength={formData.story_length}
+            languageComplexity={formData.language_complexity}
             updateFormData={updateFormData}
             nextStep={nextStep}
             prevStep={prevStep}

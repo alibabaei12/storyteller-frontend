@@ -3,53 +3,60 @@ import "../../styles/StoryCreation.css";
 
 const settings = [
   {
-    id: "cultivation",
-    name: "Cultivation World",
+    id: "modern",
+    name: "Modern World",
     description:
-      "A world where practitioners seek immortality through martial arts and spiritual cultivation",
-    icon: "🧘",
+      "Contemporary settings - cities, towns, everyday life with hidden secrets and mysteries",
+    icon: "🏙️",
   },
   {
     id: "fantasy",
     name: "Fantasy Realm",
     description:
-      "A magical world with mythical creatures, enchanted forests, and ancient mysteries",
+      "Magical worlds with wizards, dragons, enchanted forests, and mystical powers",
     icon: "🧙",
-  },
-  {
-    id: "academy",
-    name: "Magical Academy",
-    description:
-      "A school where students learn to control their magical abilities and unlock their potential",
-    icon: "🏫",
   },
   {
     id: "scifi",
     name: "Sci-Fi Future",
     description:
-      "A futuristic world with advanced technology, space travel, and new frontiers",
+      "Futuristic worlds with advanced technology, space travel, and scientific wonders",
     icon: "🚀",
   },
   {
-    id: "apocalypse",
-    name: "Apocalypse Survival",
+    id: "academy",
+    name: "School & Academy",
     description:
-      "A world in ruins where survivors must adapt to new dangers and harsh conditions",
-    icon: "☢️",
+      "Educational settings - high schools, universities, magical academies, boarding schools",
+    icon: "🏫",
+  },
+  {
+    id: "historical",
+    name: "Historical Era",
+    description:
+      "Past time periods - medieval times, ancient civilizations, Victorian era, etc.",
+    icon: "🏰",
   },
   {
     id: "gamelike",
-    name: "Game-like World",
+    name: "Game World",
     description:
-      "A world with RPG mechanics like levels, skills, and quests that characters can interact with",
+      "Video game-inspired reality with levels, skills, quests, and RPG mechanics",
     icon: "🎮",
   },
   {
-    id: "modern",
-    name: "Modern Adventure",
+    id: "cultivation",
+    name: "Cultivation World",
     description:
-      "Contemporary setting with hidden secrets, mysterious organizations, or supernatural elements",
-    icon: "🏙️",
+      "Eastern fantasy realm where people seek immortality through martial arts and spiritual growth",
+    icon: "🧘",
+  },
+  {
+    id: "apocalypse",
+    name: "Post-Apocalyptic",
+    description:
+      "Harsh worlds where civilization has collapsed and survival is everything",
+    icon: "☢️",
   },
 ];
 

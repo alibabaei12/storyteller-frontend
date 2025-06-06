@@ -171,14 +171,41 @@ Create your own adventure: ${getShareUrl(selectedStory.id)}
       {error && <div className="error">{error}</div>}
 
       {stories.length === 0 ? (
-        <div className="card empty-state">
-          <p>You don't have any stories yet.</p>
-          <button
-            className="btn btn-accent"
-            onClick={() => navigate("/new-story")}
-          >
-            Create Your First Story
-          </button>
+        <div className="empty-state-enhanced">
+          <div className="empty-icon">📚</div>
+          <h3 className="empty-title">Your Story Collection Awaits!</h3>
+          <p className="empty-description">
+            Ready to embark on your first AI-powered adventure? Create a unique
+            character and watch as your choices shape an incredible story
+            tailored just for you.
+          </p>
+
+          <div className="empty-features">
+            <div className="feature-item">
+              <span className="feature-emoji">🎭</span>
+              <span>Create unique characters</span>
+            </div>
+            <div className="feature-item">
+              <span className="feature-emoji">🌟</span>
+              <span>AI-generated storylines</span>
+            </div>
+            <div className="feature-item">
+              <span className="feature-emoji">🔀</span>
+              <span>Your choices matter</span>
+            </div>
+          </div>
+
+          <div className="empty-actions">
+            <button
+              className="btn btn-accent btn-large"
+              onClick={() => navigate("/new-story")}
+            >
+              ✨ Create Your First Story
+            </button>
+            <button className="btn btn-secondary" onClick={() => navigate("/")}>
+              Learn More
+            </button>
+          </div>
         </div>
       ) : (
         <div className="stories-grid">
@@ -194,11 +221,17 @@ Create your own adventure: ${getShareUrl(selectedStory.id)}
                   <p>
                     <strong>Setting:</strong> {story.setting}
                   </p>
-                  {story.cultivation_stage && (
-                    <p>
-                      <strong>Progress:</strong> {story.cultivation_stage}
-                    </p>
-                  )}
+                  <p>
+                    <strong>Tone:</strong> {story.tone}
+                  </p>
+                  {story.cultivation_stage &&
+                    !["romance", "mystery", "horror", "slice-of-life"].includes(
+                      story.setting
+                    ) && (
+                      <p>
+                        <strong>Progress:</strong> {story.cultivation_stage}
+                      </p>
+                    )}
                   <p className="story-date">
                     Last updated: {formatDate(story.last_updated)}
                   </p>

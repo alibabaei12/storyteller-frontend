@@ -133,11 +133,14 @@ const StoryTimeline = () => {
           <p>
             <strong>Created:</strong> {formatDate(story.last_updated)}
           </p>
-          {story.cultivation_stage && (
-            <p>
-              <strong>Progress Level:</strong> {story.cultivation_stage}
-            </p>
-          )}
+          {story.cultivation_stage &&
+            !["romance", "mystery", "horror", "slice-of-life"].includes(
+              story.setting
+            ) && (
+              <p>
+                <strong>Progress Level:</strong> {story.cultivation_stage}
+              </p>
+            )}
         </div>
 
         <div className="timeline-actions">

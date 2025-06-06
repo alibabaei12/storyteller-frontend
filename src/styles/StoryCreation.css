@@ -140,8 +140,19 @@
 .tone-card.selected,
 .power-card.selected {
   border-color: var(--primary-color);
-  background-color: var(--primary-light);
-  color: var(--text-on-primary);
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.setting-card.selected .setting-name,
+.setting-card.selected .setting-description,
+.origin-card.selected .origin-name,
+.origin-card.selected .origin-description,
+.tone-card.selected .tone-name,
+.tone-card.selected .tone-description,
+.power-card.selected .power-name,
+.power-card.selected .power-description {
+  color: white;
 }
 
 .setting-icon,
@@ -252,8 +263,12 @@
 
 .gender-option.selected {
   border-color: var(--primary-color);
-  background-color: var(--primary-light);
-  color: var(--text-on-primary);
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.gender-option.selected .gender-name {
+  color: white;
 }
 
 .gender-icon {
@@ -293,8 +308,14 @@
 
 .length-option.selected {
   border-color: var(--primary-color);
-  background-color: var(--primary-light);
-  color: var(--text-on-primary);
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.length-option.selected .length-name,
+.length-option.selected .length-description,
+.length-option.selected .length-example {
+  color: white;
 }
 
 .length-icon {
@@ -318,6 +339,13 @@
 .length-description {
   font-size: 0.9rem;
   color: var(--text-secondary);
+}
+
+.length-example {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-top: 5px;
 }
 
 /* Step Actions */

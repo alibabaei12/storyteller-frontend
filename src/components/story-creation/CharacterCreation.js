@@ -3,45 +3,67 @@ import "../../styles/StoryCreation.css";
 
 const characterOrigins = [
   {
-    id: "normal",
-    name: "Ordinary Person",
+    id: "ordinary",
+    name: "Everyday Hero",
     description:
-      "A regular person with no special background, relying on wit and determination",
-    icon: "👤",
+      "A relatable person living a normal life, ready for extraordinary moments",
+    icon: "🙂",
   },
   {
-    id: "hidden",
-    name: "Hidden Potential",
+    id: "ambitious",
+    name: "Ambitious Dreamer",
     description:
-      "Someone with latent abilities that have yet to be discovered or unlocked",
-    icon: "✨",
+      "Someone with big goals and the drive to achieve them, no matter the obstacles",
+    icon: "⭐",
   },
   {
-    id: "gifted",
-    name: "Natural Talent",
+    id: "caring",
+    name: "Caring Soul",
     description:
-      "Born with natural aptitude and quick to learn new skills and abilities",
-    icon: "🌟",
-  },
-  {
-    id: "underdog",
-    name: "Underdog",
-    description:
-      "Starting at a disadvantage but with the determination to overcome all obstacles",
-    icon: "🦮",
+      "A compassionate person who puts others first and brings people together",
+    icon: "💖",
   },
   {
     id: "mysterious",
     name: "Mysterious Past",
     description:
-      "Someone with an enigmatic history that slowly unravels throughout the story",
-    icon: "❓",
+      "Someone with secrets and a complex history that slowly unfolds",
+    icon: "🎭",
   },
   {
     id: "reincarnated",
     name: "Reincarnated",
-    description: "Reborn with memories or knowledge from a previous life",
+    description:
+      "Someone reborn with memories or knowledge from a previous life",
     icon: "🔄",
+  },
+  {
+    id: "rebellious",
+    name: "Free Spirit",
+    description:
+      "An independent thinker who challenges rules and follows their own path",
+    icon: "🦋",
+  },
+  {
+    id: "intellectual",
+    name: "Brilliant Mind",
+    description:
+      "A clever person who solves problems through wit, knowledge, and creativity",
+    icon: "🧠",
+  },
+  {
+    id: "underdog",
+    name: "Rising Underdog",
+    description:
+      "Starting from humble beginnings with the heart to overcome any challenge",
+    icon: "🌱",
+  },
+  {
+    id: "charming",
+    name: "Natural Charmer",
+    description:
+      "Someone with magnetic personality who easily connects with others",
+    icon: "✨",
   },
 ];
 

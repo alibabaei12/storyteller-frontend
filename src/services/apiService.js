@@ -35,7 +35,11 @@ const getAuthToken = async () => {
 };
 
 // Helper to create fetch options with authentication
-const createFetchOptions = async (method = "GET", body = null) => {
+const createFetchOptions = async (
+  method = "GET",
+  body = null,
+  timeout = 30000
+) => {
   const options = {
     method,
     mode: "cors",
@@ -44,6 +48,7 @@ const createFetchOptions = async (method = "GET", body = null) => {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
+    signal: AbortSignal.timeout(timeout), // 30 second timeout by default
   };
 
   // Add auth token if available
@@ -73,6 +78,33 @@ const createFetchOptions = async (method = "GET", body = null) => {
   });
 
   return options;
+};
+
+// Helper to handle fetch with timeout and network errors
+const fetchWithTimeout = async (url, options) => {
+  try {
+    const response = await fetch(url, options);
+    return response;
+  } catch (error) {
+    console.error("Fetch error:", error);
+
+    // Handle timeout errors
+    if (error.name === "TimeoutError" || error.name === "AbortError") {
+      throw new Error(
+        "Request timed out. Our AI might be generating a really amazing story! Please try again."
+      );
+    }
+
+    // Handle network errors
+    if (error.name === "TypeError" && error.message.includes("fetch")) {
+      throw new Error(
+        "Connection failed. Please check your internet connection and try again."
+      );
+    }
+
+    // Re-throw other errors
+    throw error;
+  }
 };
 
 // Helper to handle API responses
@@ -108,6 +140,30 @@ const handleResponse = async (response) => {
       );
     }
 
+    // AI Generation specific errors (HTTP 500/502/503)
+    if (response.status >= 500) {
+      const aiErrorMsg =
+        "Our AI storyteller is temporarily overwhelmed. Please try again in a moment.";
+      throw new Error(errorData?.error || aiErrorMsg);
+    }
+
+    // Rate limiting from OpenAI (HTTP 429 from upstream)
+    if (
+      response.status === 502 ||
+      (errorData?.error && errorData.error.includes("rate"))
+    ) {
+      throw new Error(
+        "Our AI is very busy right now. Please wait a moment and try again."
+      );
+    }
+
+    // Network/timeout errors
+    if (response.status === 408 || response.status === 504) {
+      throw new Error(
+        "The story is taking longer than usual to generate. Please try again."
+      );
+    }
+
     throw new Error(errorData?.error || `HTTP error ${response.status}`);
   }
 
@@ -131,7 +187,10 @@ export const apiService = {
     try {
       const options = await createFetchOptions();
       console.log("Checking API status...");
-      const response = await fetch(`${API_BASE_URL}/status`, options);
+      const response = await fetchWithTimeout(
+        `${API_BASE_URL}/status`,
+        options
+      );
       return handleResponse(response);
     } catch (error) {
       console.error("API Status Error:", error);
@@ -146,7 +205,10 @@ export const apiService = {
     try {
       const options = await createFetchOptions();
       console.log("Getting all stories...");
-      const response = await fetch(`${API_BASE_URL}/stories`, options);
+      const response = await fetchWithTimeout(
+        `${API_BASE_URL}/stories`,
+        options
+      );
       return handleResponse(response);
     } catch (error) {
       console.error("Get Stories Error:", error);
@@ -159,7 +221,7 @@ export const apiService = {
     try {
       const options = await createFetchOptions();
       console.log(`Getting story ${storyId}...`);
-      const response = await fetch(
+      const response = await fetchWithTimeout(
         `${API_BASE_URL}/stories/${storyId}`,
         options
       );
@@ -175,7 +237,7 @@ export const apiService = {
     try {
       const options = await createFetchOptions("DELETE");
       console.log(`Deleting story ${storyId}...`);
-      const response = await fetch(
+      const response = await fetchWithTimeout(
         `${API_BASE_URL}/stories/${storyId}`,
         options
       );
@@ -190,8 +252,12 @@ export const apiService = {
   createStory: async (storyParams) => {
     try {
       console.log("Creating new story with params:", storyParams);
-      const options = await createFetchOptions("POST", storyParams);
-      const response = await fetch(`${API_BASE_URL}/stories`, options);
+      // Use 60 second timeout for initial story generation
+      const options = await createFetchOptions("POST", storyParams, 60000);
+      const response = await fetchWithTimeout(
+        `${API_BASE_URL}/stories`,
+        options
+      );
       return handleResponse(response);
     } catch (error) {
       console.error("Create Story Error:", error);
@@ -203,8 +269,9 @@ export const apiService = {
   makeChoice: async (storyId, choiceId) => {
     try {
       console.log(`Making choice ${choiceId} in story ${storyId}...`);
-      const options = await createFetchOptions("POST");
-      const response = await fetch(
+      // Use 60 second timeout for AI generation
+      const options = await createFetchOptions("POST", null, 60000);
+      const response = await fetchWithTimeout(
         `${API_BASE_URL}/stories/${storyId}/choices/${choiceId}`,
         options
       );
@@ -220,7 +287,7 @@ export const apiService = {
     try {
       const options = await createFetchOptions();
       console.log("Getting user usage statistics...");
-      const response = await fetch(`${API_BASE_URL}/usage`, options);
+      const response = await fetchWithTimeout(`${API_BASE_URL}/usage`, options);
       return handleResponse(response);
     } catch (error) {
       console.error("Get Usage Error:", error);

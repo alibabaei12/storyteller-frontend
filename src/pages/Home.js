@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiService } from "../services/apiService";
+import { useAuth } from "../contexts/AuthContext";
 import storytellerLogo from "../images/storytellerlogo.png";
 import "../styles/Home.css";
 
 const Home = () => {
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
   const [apiStatus, setApiStatus] = useState({ checked: false, online: false });
   const [error, setError] = useState("");
   const [showDemo, setShowDemo] = useState(false);
@@ -260,17 +262,23 @@ const Home = () => {
 
               <div className="demo-footer">
                 <p>
-                  This is just a preview! Create your account to start your own
-                  personalized adventure.
+                  This is just a preview!{" "}
+                  {currentUser
+                    ? "Ready to create your own adventure?"
+                    : "Create your account to start your own personalized adventure."}
                 </p>
                 <button
                   className="btn btn-accent"
                   onClick={() => {
                     setShowDemo(false);
-                    navigate("/signup");
+                    if (currentUser) {
+                      navigate("/new-story");
+                    } else {
+                      navigate("/signup");
+                    }
                   }}
                 >
-                  Start My Adventure
+                  {currentUser ? "Create My Story" : "Start My Adventure"}
                 </button>
               </div>
             </div>
