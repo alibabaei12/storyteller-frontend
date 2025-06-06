@@ -17,10 +17,7 @@ const getAuthToken = async () => {
     try {
       console.log("Getting auth token for user:", user.email);
       const token = await user.getIdToken(true); // Force refresh token
-      console.log(
-        "Token retrieved successfully (first 20 chars):",
-        token.substring(0, 20)
-      );
+      console.log("Token retrieved successfully");
       return token;
     } catch (error) {
       console.error("Error getting auth token:", error);
@@ -53,7 +50,7 @@ const createFetchOptions = async (
   const token = await getAuthToken();
   if (token) {
     options.headers.Authorization = `Bearer ${token}`;
-    console.log("Added Authorization header with token");
+    console.log("Added Authorization header");
   } else {
     console.warn("No auth token available for request");
   }
@@ -61,7 +58,7 @@ const createFetchOptions = async (
   // Add user ID header for usage tracking
   if (auth.currentUser) {
     options.headers["X-User-ID"] = auth.currentUser.uid;
-    console.log("Added X-User-ID header:", auth.currentUser.uid);
+    console.log("Added X-User-ID header");
   }
 
   // Add body if provided

@@ -24,8 +24,6 @@ const SharedStoryViewer = () => {
             : "https://storyteller-backend-liry.onrender.com");
 
         const url = `${API_BASE_URL}/api/shared/${shareToken}`;
-        console.log("API_BASE_URL:", API_BASE_URL);
-        console.log("Full URL:", url);
         console.log("Fetching shared story...");
 
         const response = await fetch(url);
