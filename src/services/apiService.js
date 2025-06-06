@@ -261,7 +261,8 @@ export const apiService = {
       return handleResponse(response);
     } catch (error) {
       console.error("Create Story Error:", error);
-      throw new Error(`Failed to create story: ${error.message}`);
+      // Pass through the specific error message (especially for 429 limit errors)
+      throw error;
     }
   },
 
@@ -292,6 +293,22 @@ export const apiService = {
     } catch (error) {
       console.error("Get Usage Error:", error);
       throw new Error(`Failed to get usage statistics: ${error.message}`);
+    }
+  },
+
+  // Fix usage count
+  fixUsage: async () => {
+    try {
+      const options = await createFetchOptions("POST");
+      console.log("Fixing usage count...");
+      const response = await fetchWithTimeout(
+        `${API_BASE_URL}/usage/fix`,
+        options
+      );
+      return handleResponse(response);
+    } catch (error) {
+      console.error("Fix Usage Error:", error);
+      throw new Error(`Failed to fix usage: ${error.message}`);
     }
   },
 };

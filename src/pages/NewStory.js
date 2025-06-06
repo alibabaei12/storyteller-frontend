@@ -57,7 +57,8 @@ const NewStory = () => {
       navigate(`/story/${newStory.id}`);
     } catch (error) {
       console.error("Error creating story:", error);
-      setError("Failed to create story. Please try again.");
+      // Show the specific error message from the API (includes limit information)
+      setError(error.message || "Failed to create story. Please try again.");
       setLoading(false);
     }
   };
