@@ -3,10 +3,16 @@ import "../../styles/StoryCreation.css";
 
 const tones = [
   {
-    id: "romantic",
-    name: "Romance",
-    description: "Sweet love stories, relationships, and emotional connections",
-    icon: "💕",
+    id: "shonen",
+    name: "Shonen",
+    description: "Weak to strong progression, training, and overcoming limits",
+    icon: "⚡",
+  },
+  {
+    id: "adventure",
+    name: "Adventure",
+    description: "Exciting journeys, exploration, and thrilling quests",
+    icon: "🗺️",
   },
   {
     id: "mystery",
@@ -16,23 +22,10 @@ const tones = [
     icon: "🔍",
   },
   {
-    id: "adventure",
-    name: "Adventure",
-    description: "Exciting journeys, exploration, and thrilling quests",
-    icon: "🗺️",
-  },
-  {
-    id: "shonen",
-    name: "Shonen",
-    description: "Weak to strong progression, training, and overcoming limits",
-    icon: "⚡",
-  },
-  {
-    id: "thriller",
-    name: "Thriller",
-    description:
-      "Heart-pounding suspense, danger, and edge-of-your-seat action",
-    icon: "🔥",
+    id: "romantic",
+    name: "Romance",
+    description: "Sweet love stories, relationships, and emotional connections",
+    icon: "💕",
   },
   {
     id: "comedy",
@@ -48,55 +41,17 @@ const tones = [
     icon: "🎭",
   },
   {
-    id: "horror",
-    name: "Horror",
-    description: "Scary and supernatural, with dark atmosphere and chills",
-    icon: "👻",
-  },
-  {
-    id: "slice-of-life",
-    name: "Slice of Life",
-    description: "Realistic everyday stories focusing on ordinary moments",
-    icon: "☕",
+    id: "thriller",
+    name: "Thriller",
+    description:
+      "Heart-pounding suspense, danger, and edge-of-your-seat action",
+    icon: "🔥",
   },
   {
     id: "epic",
     name: "Epic Fantasy",
     description: "Grand heroic tales with larger-than-life adventures",
     icon: "⚔️",
-  },
-  {
-    id: "philosophical",
-    name: "Deep & Thoughtful",
-    description: "Contemplative stories exploring life's big questions",
-    icon: "🤔",
-  },
-];
-
-const storyLengths = [
-  {
-    id: "short",
-    name: "Quick Adventure",
-    description: "A focused story that can be completed in 5-8 turns",
-    icon: "📏",
-  },
-  {
-    id: "medium",
-    name: "Standard Tale",
-    description: "A balanced story experience lasting 10-15 turns",
-    icon: "📏📏",
-  },
-  {
-    id: "long",
-    name: "Long Epic",
-    description: "An extensive tale that can extend to 20+ turns",
-    icon: "📏📏📏",
-  },
-  {
-    id: "infinite",
-    name: "Infinite Adventure",
-    description: "A never-ending story that continues as long as you wish",
-    icon: "♾️",
   },
 ];
 
@@ -127,7 +82,6 @@ const languageComplexities = [
 const StoryTone = ({
   setting,
   tone,
-  storyLength,
   languageComplexity,
   updateFormData,
   nextStep,
@@ -135,10 +89,6 @@ const StoryTone = ({
 }) => {
   const handleToneSelect = (toneId) => {
     updateFormData({ tone: toneId });
-  };
-
-  const handleLengthSelect = (lengthId) => {
-    updateFormData({ story_length: lengthId });
   };
 
   const handleLanguageComplexitySelect = (complexityId) => {
@@ -182,25 +132,6 @@ const StoryTone = ({
               <h4 className="length-name">{item.name}</h4>
               <p className="length-description">{item.description}</p>
               <p className="length-example">{item.example}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <h4 className="section-title">Select Story Length</h4>
-      <div className="length-options">
-        {storyLengths.map((item) => (
-          <div
-            key={item.id}
-            className={`length-option ${
-              storyLength === item.id ? "selected" : ""
-            }`}
-            onClick={() => handleLengthSelect(item.id)}
-          >
-            <div className="length-icon">{item.icon}</div>
-            <div className="length-info">
-              <h4 className="length-name">{item.name}</h4>
-              <p className="length-description">{item.description}</p>
             </div>
           </div>
         ))}

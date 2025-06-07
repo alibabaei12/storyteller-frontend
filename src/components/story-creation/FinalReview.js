@@ -56,17 +56,6 @@ const getGenderName = (genderId) => {
   return genderMap[genderId] || genderId;
 };
 
-// Helper function to get readable names for story length
-const getLengthName = (lengthId) => {
-  const lengthMap = {
-    short: "Short Story (5-8 turns)",
-    medium: "Medium Length (10-15 turns)",
-    long: "Long Epic (20+ turns)",
-    infinite: "Infinite Adventure",
-  };
-  return lengthMap[lengthId] || lengthId;
-};
-
 // Helper function to get readable names for language complexity
 const getLanguageComplexityName = (complexityId) => {
   const complexityMap = {
@@ -114,9 +103,6 @@ const FinalReview = ({ formData, prevStep, handleSubmit, loading }) => {
             <strong>Language:</strong>{" "}
             {getLanguageComplexityName(formData.language_complexity)}
           </p>
-          <p>
-            <strong>Length:</strong> {getLengthName(formData.story_length)}
-          </p>
         </div>
       </div>
 
@@ -126,12 +112,10 @@ const FinalReview = ({ formData, prevStep, handleSubmit, loading }) => {
           selections. You'll be able to make choices that shape the narrative
           and affect your character's journey.
         </p>
-        {formData.story_length === "infinite" && (
-          <p className="infinite-note">
-            <strong>Note:</strong> You've selected an infinite adventure! Your
-            story can continue indefinitely.
-          </p>
-        )}
+        <p className="infinite-note">
+          <strong>Note:</strong> All stories now use Arc-based progression and
+          can continue indefinitely based on your choices!
+        </p>
       </div>
 
       <div className="step-navigation">

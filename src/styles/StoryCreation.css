@@ -435,4 +435,41 @@
 
 .step-navigation .btn {
   min-width: 100px;
+}
+
+/* Manga-specific styles */
+.genre-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.genre-tag {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.setting-card.selected .genre-tag {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.manga-coming-soon {
+  background-color: var(--bg-secondary);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.coming-soon-text {
+  color: var(--text-secondary);
+  font-style: italic;
+  margin: 0;
 } 

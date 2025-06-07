@@ -19,10 +19,11 @@ const NewStory = () => {
     character_name: "",
     character_gender: "unspecified",
     setting: "",
-    tone: "adventure",
-    character_origin: "normal",
-    story_length: "medium", // Default to medium length stories
+    tone: "shonen", // Default to shonen for manga
+    character_origin: "weak", // Default to weak for progression stories
+
     language_complexity: "simple", // Default to simple/accessible language
+    manga_genre: null, // New field for manga-specific genres
   });
 
   // Update form data
@@ -70,6 +71,7 @@ const NewStory = () => {
         return (
           <SettingSelect
             setting={formData.setting}
+            manga_genre={formData.manga_genre}
             updateFormData={updateFormData}
             nextStep={nextStep}
           />
@@ -90,7 +92,6 @@ const NewStory = () => {
           <StoryTone
             setting={formData.setting}
             tone={formData.tone}
-            storyLength={formData.story_length}
             languageComplexity={formData.language_complexity}
             updateFormData={updateFormData}
             nextStep={nextStep}

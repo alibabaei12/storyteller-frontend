@@ -3,32 +3,11 @@ import "../../styles/StoryCreation.css";
 
 const characterOrigins = [
   {
-    id: "ordinary",
-    name: "Everyday Hero",
+    id: "underdog",
+    name: "Rising Underdog",
     description:
-      "A relatable person living a normal life, ready for extraordinary moments",
-    icon: "🙂",
-  },
-  {
-    id: "ambitious",
-    name: "Ambitious Dreamer",
-    description:
-      "Someone with big goals and the drive to achieve them, no matter the obstacles",
-    icon: "⭐",
-  },
-  {
-    id: "caring",
-    name: "Caring Soul",
-    description:
-      "A compassionate person who puts others first and brings people together",
-    icon: "💖",
-  },
-  {
-    id: "mysterious",
-    name: "Mysterious Past",
-    description:
-      "Someone with secrets and a complex history that slowly unfolds",
-    icon: "🎭",
+      "Starting from humble beginnings with the heart to overcome any challenge",
+    icon: "🌱",
   },
   {
     id: "reincarnated",
@@ -38,11 +17,25 @@ const characterOrigins = [
     icon: "🔄",
   },
   {
-    id: "rebellious",
-    name: "Free Spirit",
+    id: "mysterious",
+    name: "Mysterious Past",
     description:
-      "An independent thinker who challenges rules and follows their own path",
-    icon: "🦋",
+      "Someone with secrets and a complex history that slowly unfolds",
+    icon: "🎭",
+  },
+  {
+    id: "ambitious",
+    name: "Ambitious Dreamer",
+    description:
+      "Someone with big goals and the drive to achieve them, no matter the obstacles",
+    icon: "⭐",
+  },
+  {
+    id: "ordinary",
+    name: "Everyday Hero",
+    description:
+      "A relatable person living a normal life, ready for extraordinary moments",
+    icon: "🙂",
   },
   {
     id: "intellectual",
@@ -50,20 +43,6 @@ const characterOrigins = [
     description:
       "A clever person who solves problems through wit, knowledge, and creativity",
     icon: "🧠",
-  },
-  {
-    id: "underdog",
-    name: "Rising Underdog",
-    description:
-      "Starting from humble beginnings with the heart to overcome any challenge",
-    icon: "🌱",
-  },
-  {
-    id: "charming",
-    name: "Natural Charmer",
-    description:
-      "Someone with magnetic personality who easily connects with others",
-    icon: "✨",
   },
 ];
 
