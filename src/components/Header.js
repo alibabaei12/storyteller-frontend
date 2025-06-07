@@ -64,7 +64,7 @@ const Header = () => {
           StoryTeller
         </h1>
         <p className="header-subtitle">
-          An AI-powered interactive fiction experience
+          Your Gateway to Epic Interactive Adventures
         </p>
 
         <nav className="header-nav">

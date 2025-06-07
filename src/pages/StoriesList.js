@@ -95,7 +95,7 @@ const StoriesList = () => {
   };
 
   const getShareText = (story) => {
-    return `🌟 Check out my ${story.setting} adventure as ${story.character_name} on @StoryTellerAI! Create your own AI-powered interactive story at`;
+    return `🌟 Check out my ${story.setting} adventure as ${story.character_name} on @StoryTellerAI! Create your own interactive story where choices matter at`;
   };
 
   const shareToTwitter = async () => {
@@ -117,7 +117,7 @@ const StoriesList = () => {
     if (!selectedStory) return;
     try {
       const url = await getShareUrl(selectedStory.id);
-      const title = `${selectedStory.character_name}'s ${selectedStory.setting} Adventure - AI-Generated Interactive Story`;
+      const title = `${selectedStory.character_name}'s ${selectedStory.setting} Adventure - Interactive Story Experience`;
       const redditUrl = `https://reddit.com/submit?url=${encodeURIComponent(
         url
       )}&title=${encodeURIComponent(title)}`;
@@ -134,11 +134,11 @@ const StoriesList = () => {
       const url = await getShareUrl(selectedStory.id);
       const instagramText = `🌟 Just created an epic ${selectedStory.setting} adventure as ${selectedStory.character_name}! ⚔️✨
 
-AI-powered interactive storytelling where YOUR choices shape the story! 🎮📚
+Interactive storytelling where YOUR choices shape the story! 🎮📚
 
 Create your own adventure: ${url}
 
-#StoryTelling #AIStory #InteractiveStory #Adventure #Gaming`;
+#StoryTelling #InteractiveStory #Adventure #Gaming #ChoicesMatter`;
 
       try {
         await navigator.clipboard.writeText(instagramText);
@@ -207,7 +207,7 @@ Create your own adventure: ${url}
           <div className="empty-icon">📚</div>
           <h3 className="empty-title">Your Story Collection Awaits!</h3>
           <p className="empty-description">
-            Ready to embark on your first AI-powered adventure? Create a unique
+            Ready to embark on your first epic adventure? Create a unique
             character and watch as your choices shape an incredible story
             tailored just for you.
           </p>
@@ -219,7 +219,7 @@ Create your own adventure: ${url}
             </div>
             <div className="feature-item">
               <span className="feature-emoji">🌟</span>
-              <span>AI-generated storylines</span>
+              <span>Personalized storylines</span>
             </div>
             <div className="feature-item">
               <span className="feature-emoji">🔀</span>
@@ -272,13 +272,13 @@ Create your own adventure: ${url}
 
               <div className="story-card-actions">
                 <button
-                  className="btn btn-accent"
+                  className="btn btn-continue"
                   onClick={() => handleContinueStory(story.id)}
                 >
                   Continue
                 </button>
                 <button
-                  className="btn btn-secondary"
+                  className="btn btn-timeline"
                   onClick={() => handleViewTimeline(story.id)}
                 >
                   📖 Timeline
@@ -304,11 +304,11 @@ Create your own adventure: ${url}
       )}
 
       <div className="page-actions">
-        <button className="btn" onClick={() => navigate("/")}>
+        <button className="btn btn-back-home" onClick={() => navigate("/")}>
           Back to Home
         </button>
         <button
-          className="btn btn-accent"
+          className="btn btn-create-story"
           onClick={() => navigate("/new-story")}
         >
           Create New Story

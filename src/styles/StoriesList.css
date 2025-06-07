@@ -4,9 +4,13 @@
 }
 
 .page-title {
+  font-family: var(--font-header);
   color: var(--primary-color);
   margin-bottom: 25px;
   text-align: center;
+  font-size: var(--font-size-headline);
+  font-weight: 700;
+  text-shadow: var(--text-shadow-medium);
 }
 
 .stories-grid {
@@ -23,9 +27,12 @@
 }
 
 .story-card-title {
+  font-family: var(--font-subheader);
   color: var(--primary-color);
   margin-bottom: 15px;
   font-size: 1.5rem;
+  font-weight: 600;
+  text-shadow: var(--text-shadow-subtle);
 }
 
 .story-card-details {
@@ -37,45 +44,152 @@
 }
 
 .story-card-info p {
+  font-family: var(--font-body);
   margin-bottom: 8px;
   color: var(--text-secondary);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-normal);
 }
 
 .story-date {
+  font-family: var(--font-body);
   font-size: 0.9rem;
   color: var(--text-secondary);
   margin-top: 15px;
+  line-height: var(--line-height-normal);
 }
 
 .story-card-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
   margin-top: 15px;
 }
 
 .story-card-actions .btn {
   flex: 1;
-  min-width: 80px;
+  min-width: 90px;
   font-size: 0.9rem;
-  padding: 8px 12px;
+  padding: 10px 16px;
+  font-weight: 500;
+  text-transform: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
-.btn-delete {
-  background-color: #f44336;
+/* Continue Story Button - Primary Purple */
+.btn.btn-continue {
+  background: linear-gradient(135deg, #8b5cf6, #a78bfa) !important;
+  color: white !important;
+  box-shadow: 0 3px 12px rgba(139, 92, 246, 0.3);
 }
 
-.btn-delete:hover {
-  background-color: #d32f2f;
+.btn.btn-continue:hover {
+  background: linear-gradient(135deg, #7c3aed, #8b5cf6) !important;
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+  transform: translateY(-2px);
 }
 
-.btn-share {
-  background-color: #1DA1F2;
-  color: white;
+/* Timeline Button - Cool Blue */
+.btn.btn-timeline {
+  background: linear-gradient(135deg, #3b82f6, #60a5fa) !important;
+  color: white !important;
+  box-shadow: 0 3px 12px rgba(59, 130, 246, 0.3);
 }
 
-.btn-share:hover {
-  background-color: #1991db;
+.btn.btn-timeline:hover {
+  background: linear-gradient(135deg, #2563eb, #3b82f6) !important;
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Share Button - Fresh Green */
+.btn.btn-share {
+  background: linear-gradient(135deg, #10b981, #34d399) !important;
+  color: white !important;
+  box-shadow: 0 3px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn.btn-share:hover {
+  background: linear-gradient(135deg, #059669, #10b981) !important;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Delete Button - Clear Red */
+.btn.btn-delete {
+  background: linear-gradient(135deg, #ef4444, #f87171) !important;
+  color: white !important;
+  box-shadow: 0 3px 12px rgba(239, 68, 68, 0.3);
+}
+
+.btn.btn-delete:hover {
+  background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Page-level actions */
+.page-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  align-items: center;
+  gap: 20px;
+}
+
+.page-actions .btn {
+  padding: 12px 24px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Back to Home - Neutral Gray */
+.btn.btn-back-home {
+  background: linear-gradient(135deg, #6b7280, #9ca3af) !important;
+  color: white !important;
+  box-shadow: 0 4px 15px rgba(107, 114, 128, 0.3);
+}
+
+.btn.btn-back-home:hover {
+  background: linear-gradient(135deg, #4b5563, #6b7280) !important;
+  box-shadow: 0 6px 20px rgba(107, 114, 128, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Create New Story - Vibrant Orange */
+.btn.btn-create-story {
+  background: linear-gradient(135deg, #f59e0b, #fbbf24) !important;
+  color: white !important;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+  font-weight: 700;
+}
+
+.btn.btn-create-story:hover {
+  background: linear-gradient(135deg, #d97706, #f59e0b) !important;
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.6);
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* Remove old conflicting styles */
+.btn-primary, .btn-outline, .btn-secondary, .btn-accent {
+  /* These will be overridden by specific button classes above */
 }
 
 .empty-state {
@@ -84,8 +198,10 @@
 }
 
 .empty-state p {
+  font-family: var(--font-body);
   margin-bottom: 20px;
   font-size: 1.1rem;
+  line-height: var(--line-height-normal);
 }
 
 /* Enhanced Empty State */
@@ -106,16 +222,19 @@
 }
 
 .empty-title {
+  font-family: var(--font-header);
   color: var(--primary-color);
   font-size: 2rem;
   margin-bottom: 15px;
   font-weight: 700;
+  text-shadow: var(--text-shadow-medium);
 }
 
 .empty-description {
+  font-family: var(--font-body);
   color: var(--text-secondary);
   font-size: 1.1rem;
-  line-height: 1.6;
+  line-height: var(--line-height-normal);
   max-width: 500px;
   margin: 0 auto 30px;
 }
@@ -142,9 +261,11 @@
 }
 
 .feature-item span:last-child {
+  font-family: var(--font-body);
   color: var(--text-secondary);
   font-size: 0.9rem;
   font-weight: 500;
+  line-height: var(--line-height-normal);
 }
 
 .empty-actions {
@@ -156,12 +277,6 @@
 
 .empty-actions .btn {
   min-width: 180px;
-}
-
-.page-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
 }
 
 /* Share Modal */
@@ -200,10 +315,12 @@
 }
 
 .modal-header h3 {
-  color: var(--primary-color);
+  font-family: var(--font-subheader);
   margin: 0;
-  font-size: 1.3rem;
+  color: var(--primary-color);
+  font-size: 1.4rem;
   font-weight: 600;
+  text-shadow: var(--text-shadow-subtle);
 }
 
 .modal-close {
@@ -232,10 +349,11 @@
 }
 
 .share-description {
+  font-family: var(--font-body);
   color: var(--text-secondary);
   margin-bottom: 20px;
+  line-height: var(--line-height-normal);
   text-align: center;
-  line-height: 1.5;
 }
 
 .share-options {
@@ -276,14 +394,17 @@
 }
 
 .share-platform {
+  font-family: var(--font-ui);
   font-weight: 600;
   color: var(--text-primary);
-  font-size: 1rem;
+  margin-bottom: 4px;
 }
 
 .share-desc {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  line-height: var(--line-height-normal);
 }
 
 .twitter-option:hover {

@@ -72,6 +72,7 @@ const SettingSelect = ({ setting, manga_genre, updateFormData, nextStep }) => {
             className={`setting-card ${
               selectedGenre?.id === genre.id ? "selected" : ""
             }`}
+            data-genre={genre.id}
             onClick={() => handleGenreSelect(genre.id)}
           >
             <div className="setting-icon">{genre.icon}</div>

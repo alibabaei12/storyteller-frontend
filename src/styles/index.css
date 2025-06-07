@@ -1,5 +1,5 @@
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+/* Import Google Fonts - Enhanced Typography System */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
   /* Light Theme */
@@ -18,9 +18,29 @@
   --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   --transition: all 0.3s ease;
   
-  /* Typography */
-  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-story: 'Libre Baskerville', Georgia, serif;
+  /* Enhanced Typography System */
+  --font-header: 'DM Serif Display', 'Playfair Display', Georgia, serif;
+  --font-subheader: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-ui: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-story: 'Playfair Display', Georgia, serif;
+  
+  /* Font Hierarchy */
+  --font-size-headline: 2.25rem;    /* 36px */
+  --font-size-subheadline: 1.5rem;  /* 24px */
+  --font-size-body: 1rem;           /* 16px */
+  --font-size-large: 1.125rem;      /* 18px */
+  --font-size-small: 0.875rem;      /* 14px */
+  
+  /* Line Heights */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.6;
+  --line-height-relaxed: 1.8;
+  
+  /* Text Shadows for Headers */
+  --text-shadow-subtle: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  --text-shadow-medium: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  --text-shadow-strong: 2px 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 /* Dark Theme */
@@ -37,6 +57,11 @@
   --card-color: #374151;
   --border-color: #4B5563;
   --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  
+  /* Adjusted text shadows for dark theme */
+  --text-shadow-subtle: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  --text-shadow-medium: 1px 1px 4px rgba(0, 0, 0, 0.6);
+  --text-shadow-strong: 2px 2px 6px rgba(0, 0, 0, 0.7);
 }
 
 * {
@@ -46,19 +71,122 @@
 }
 
 body {
-  font-family: var(--font-ui);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
   background-color: var(--background-color);
   color: var(--text-primary);
-  line-height: 1.6;
+  line-height: var(--line-height-normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Typography Classes */
+
+/* Headlines - Main page titles */
+h1, .headline {
+  font-family: var(--font-header);
+  font-size: var(--font-size-headline);
+  font-weight: 700;
+  line-height: var(--line-height-tight);
+  color: var(--primary-color);
+  text-shadow: var(--text-shadow-medium);
+  margin-bottom: 1rem;
+}
+
+/* Subheadlines - Section titles */
+h2, .subheadline {
+  font-family: var(--font-subheader);
+  font-size: var(--font-size-subheadline);
+  font-weight: 600;
+  line-height: var(--line-height-tight);
+  color: var(--primary-color);
+  text-shadow: var(--text-shadow-subtle);
+  margin-bottom: 0.75rem;
+}
+
+/* Smaller headers */
+h3 {
+  font-family: var(--font-subheader);
+  font-size: 1.25rem; /* 20px */
+  font-weight: 600;
+  line-height: var(--line-height-tight);
+  color: var(--text-primary);
+  text-shadow: var(--text-shadow-subtle);
+  margin-bottom: 0.5rem;
+}
+
+h4 {
+  font-family: var(--font-ui);
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+h5, h6 {
+  font-family: var(--font-ui);
+  font-size: var(--font-size-body);
+  font-weight: 500;
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+/* Body text */
+p {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+/* Large text for important content */
+.text-large {
+  font-size: var(--font-size-large);
+  line-height: var(--line-height-normal);
+}
+
+/* Small text for captions, metadata */
+.text-small {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-normal);
+}
+
+/* Story content specific styling */
+.story-text, .story-content {
+  font-family: var(--font-story);
+  font-size: var(--font-size-large);
+  line-height: var(--line-height-relaxed);
+  color: var(--text-primary);
+}
+
+/* UI Elements */
+button, input, select, textarea {
+  font-family: var(--font-ui);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-button, input, select, textarea {
-  font-family: inherit;
+/* Responsive Typography */
+@media (max-width: 768px) {
+  :root {
+    --font-size-headline: 1.875rem; /* 30px */
+    --font-size-subheadline: 1.25rem; /* 20px */
+    --font-size-body: 0.875rem; /* 14px */
+    --font-size-large: 1rem; /* 16px */
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --font-size-headline: 1.5rem; /* 24px */
+    --font-size-subheadline: 1.125rem; /* 18px */
+    --font-size-body: 0.875rem; /* 14px */
+    --font-size-large: 0.9375rem; /* 15px */
+  }
 } 

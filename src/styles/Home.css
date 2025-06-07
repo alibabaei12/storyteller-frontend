@@ -1,8 +1,8 @@
-/* Hero Section */
+/* Hero Section - Enhanced with magical gradient */
 .hero-section {
   text-align: center;
   padding: 60px 20px;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  background: linear-gradient(135deg, #a066ff 0%, #7c3aed 35%, #5f1b99 100%);
   border-radius: 20px;
   margin-bottom: 60px;
   color: var(--text-on-primary);
@@ -17,8 +17,43 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.05);
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
   pointer-events: none;
+}
+
+/* Magical particle effect overlay */
+.hero-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.2), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(2px 2px at 160px 30px, rgba(255, 255, 255, 0.2), transparent);
+  background-repeat: repeat;
+  background-size: 200px 100px;
+  animation: sparkle 20s linear infinite;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+@keyframes sparkle {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-100px); }
+}
+
+/* Page background with subtle gradient */
+.home {
+  background: linear-gradient(180deg, 
+    var(--background-color) 0%, 
+    rgba(160, 102, 255, 0.02) 50%, 
+    var(--background-color) 100%);
+  min-height: 100vh;
 }
 
 .logo-container {
@@ -43,78 +78,213 @@
 .welcome-content {
   position: relative;
   z-index: 1;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 .hero-title {
-  font-size: 3rem;
+  font-family: var(--font-header);
+  font-size: var(--font-size-headline); /* 36px base, responsive */
   font-weight: 700;
   margin-bottom: 20px;
   background: linear-gradient(45deg, #ffffff, #f0f0f0);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  line-height: var(--line-height-tight);
+  position: relative;
+  text-shadow: var(--text-shadow-strong);
+  filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.4));
+}
+
+.hero-tagline {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body); /* 16px */
+  margin-bottom: 30px;
+  opacity: 0.9;
+  font-style: italic;
+  font-weight: 300;
+  color: #cfc8ff; /* light lavender shade */
+  letter-spacing: 0.5px;
+  line-height: var(--line-height-normal);
 }
 
 .hero-subtitle {
-  font-size: 1.3rem;
+  font-family: var(--font-body);
+  font-size: var(--font-size-large); /* 18px */
   margin-bottom: 15px;
   opacity: 0.95;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.6;
+  line-height: var(--line-height-normal);
+}
+
+.hero-subtitle b {
+  color: #fff;
+  font-weight: 600;
+  text-shadow: var(--text-shadow-subtle);
 }
 
 .hero-description {
+  font-family: var(--font-body);
   font-size: 1.1rem;
   margin-bottom: 40px;
   opacity: 0.9;
   font-style: italic;
+  line-height: var(--line-height-normal);
 }
 
 .action-buttons {
   display: flex;
+  flex-direction: row;
   gap: 20px;
   justify-content: center;
+  align-items: center;
+  margin-top: 40px;
   flex-wrap: wrap;
 }
 
-.btn-large {
-  padding: 16px 32px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 180px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+.primary-cta {
+  position: relative;
 }
 
-.btn-large:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+.primary-cta::after {
+  content: "Begin your epic journey";
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.primary-cta:hover::after {
+  opacity: 1;
+}
+
+.secondary-cta {
+  /* No additional margin needed for side-by-side layout */
+}
+
+.btn-large {
+  padding: 18px 36px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+}
+
+/* Primary CTA - Start Your Adventure - LARGER & DOMINANT */
+.btn-accent.btn-large {
+  background: linear-gradient(135deg, #ff6b6b, #ffd93d, #6bcf7e, #4ecdc4);
+  background-size: 300% 300%;
+  color: #fff;
+  font-size: 1.4rem;
+  padding: 22px 44px;
+  min-width: 320px;
+  box-shadow: 0 8px 32px rgba(255, 107, 107, 0.4);
+  animation: gradientShift 3s ease infinite;
+  position: relative;
+}
+
+.btn-accent.btn-large::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-accent.btn-large:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 15px 45px rgba(255, 107, 107, 0.6);
+  animation: gradientShift 1.5s ease infinite, pulse 2s ease infinite;
+}
+
+.btn-accent.btn-large:hover::before {
+  opacity: 1;
+}
+
+/* Secondary CTA - My Stories - SMALLER & SUBTLE */
+.btn-secondary.btn-large {
+  background: transparent;
+  color: var(--text-on-primary);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  font-size: 1rem;
+  padding: 14px 28px;
+  min-width: 180px;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+  text-transform: none;
+  font-weight: 500;
+}
+
+.btn-secondary.btn-large:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.2);
 }
 
 .btn-icon {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
-.btn-secondary {
-  background: rgba(255, 255, 255, 0.2);
-  color: var(--text-on-primary);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+/* Animations */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.5);
+@keyframes pulse {
+  0%, 100% { transform: translateY(-4px) scale(1.02); }
+  50% { transform: translateY(-4px) scale(1.05); }
 }
 
-/* Features Section */
+/* Features Section - Enhanced with gradient */
 .features-section {
   margin-top: 60px;
+  padding: 60px 0;
+  background: linear-gradient(135deg, 
+    rgba(124, 58, 237, 0.03) 0%, 
+    rgba(95, 27, 153, 0.05) 50%, 
+    rgba(160, 102, 255, 0.03) 100%);
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.features-section::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(124, 58, 237, 0.3) 25%, 
+    rgba(95, 27, 153, 0.5) 50%, 
+    rgba(124, 58, 237, 0.3) 75%, 
+    transparent 100%);
 }
 
 .features-header {
@@ -123,17 +293,21 @@
 }
 
 .features-header h2 {
-  font-size: 2.5rem;
+  font-family: var(--font-header);
+  font-size: var(--font-size-headline); /* Uses responsive sizing */
   color: var(--primary-color);
   margin-bottom: 15px;
   font-weight: 700;
+  text-shadow: var(--text-shadow-medium);
 }
 
 .features-header p {
-  font-size: 1.2rem;
+  font-family: var(--font-body);
+  font-size: var(--font-size-large);
   color: var(--text-secondary);
   max-width: 500px;
   margin: 0 auto;
+  line-height: var(--line-height-normal);
 }
 
 .features-grid {
@@ -143,13 +317,15 @@
   margin-bottom: 40px;
 }
 
+/* Feature Cards - Enhanced for magical theme */
 .feature-card {
-  background: var(--card-color);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
   padding: 40px 30px;
-  border-radius: 16px;
+  border-radius: 20px;
   text-align: center;
-  transition: all 0.3s ease;
-  border: 1px solid var(--border-color);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
   overflow: hidden;
 }
@@ -160,15 +336,17 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
+  height: 3px;
   background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .feature-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(160, 102, 255, 0.2);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(160, 102, 255, 0.3);
 }
 
 .feature-card:hover::before {
@@ -179,16 +357,20 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-light), var(--accent-color));
+  background: linear-gradient(135deg, rgba(160, 102, 255, 0.2), rgba(124, 58, 237, 0.3));
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 25px;
-  transition: transform 0.3s ease;
+  transition: all 0.4s ease;
+  border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .feature-card:hover .feature-icon-container {
-  transform: scale(1.1);
+  transform: scale(1.15) rotateY(15deg);
+  background: linear-gradient(135deg, rgba(160, 102, 255, 0.4), rgba(124, 58, 237, 0.5));
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(160, 102, 255, 0.3);
 }
 
 .feature-icon {
@@ -196,16 +378,19 @@
 }
 
 .feature-card h3 {
+  font-family: var(--font-subheader);
   font-size: 1.4rem;
   color: var(--text-primary);
   margin-bottom: 15px;
   font-weight: 600;
+  text-shadow: var(--text-shadow-subtle);
 }
 
 .feature-card p {
+  font-family: var(--font-body);
   color: var(--text-secondary);
-  line-height: 1.6;
-  font-size: 1rem;
+  line-height: var(--line-height-normal);
+  font-size: var(--font-size-body);
 }
 
 /* API Status */
@@ -255,8 +440,36 @@
     margin-bottom: 40px;
   }
   
+  /* Reduce particle complexity on mobile for performance */
+  .hero-section::after {
+    background-image: 
+      radial-gradient(1px 1px at 20px 30px, rgba(255, 255, 255, 0.2), transparent),
+      radial-gradient(1px 1px at 40px 70px, rgba(255, 255, 255, 0.15), transparent),
+      radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.2), transparent);
+    background-size: 150px 80px;
+    opacity: 0.4;
+  }
+  
+  .how-it-works-section,
+  .features-section {
+    padding: 40px 20px;
+    margin: 40px 0;
+  }
+  
+  .section-divider {
+    height: 40px;
+    margin: 20px 0;
+  }
+  
   .hero-title {
-    font-size: 2.2rem;
+    font-size: 2.8rem; /* Maintain visual impact on mobile */
+    line-height: 1.1;
+    filter: drop-shadow(1px 1px 6px rgba(0, 0, 0, 0.4));
+  }
+  
+  .hero-tagline {
+    font-size: 0.9rem;
+    margin-bottom: 25px;
   }
   
   .hero-subtitle {
@@ -264,18 +477,62 @@
   }
   
   .app-logo {
-    width: 100px;
-    height: 100px;
+    width: 84px; /* 30% smaller: 120px * 0.7 = 84px */
+    height: 84px;
+    margin: 0 auto;
   }
   
   .action-buttons {
     flex-direction: column;
-    align-items: center;
+    gap: 16px;
+    margin-top: 30px;
+  }
+  
+  .primary-cta::after {
+    bottom: -20px;
+    font-size: 0.75rem;
   }
   
   .btn-large {
-    width: 100%;
-    max-width: 280px;
+    max-width: 300px;
+    width: 90%;
+    padding: 16px 32px;
+    font-size: 1.1rem;
+  }
+  
+  .btn-accent.btn-large {
+    font-size: 1.2rem;
+    padding: 18px 36px;
+    min-width: 260px;
+  }
+  
+  .btn-secondary.btn-large {
+    min-width: 200px;
+    font-size: 1rem;
+    padding: 14px 28px;
+  }
+  
+  .feature-card {
+    padding: 30px 20px;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-6px) scale(1.01);
+  }
+  
+  .feature-icon-container {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .step-card {
+    padding: 25px 20px;
+  }
+  
+  .step-number {
+    width: 60px;
+    height: 60px;
+    font-size: 1.4rem;
   }
   
   .features-header h2 {
@@ -286,19 +543,75 @@
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  
-  .feature-card {
-    padding: 30px 20px;
-  }
 }
 
 @media (max-width: 480px) {
+  /* Minimal particles on very small screens */
+  .hero-section::after {
+    background-image: 
+      radial-gradient(1px 1px at 30px 40px, rgba(255, 255, 255, 0.15), transparent),
+      radial-gradient(1px 1px at 80px 60px, rgba(255, 255, 255, 0.1), transparent);
+    background-size: 120px 60px;
+    opacity: 0.3;
+  }
+  
+  .how-it-works-section,
+  .features-section {
+    padding: 30px 15px;
+    border-radius: 16px;
+  }
+  
+  .section-divider {
+    height: 30px;
+    margin: 15px 0;
+  }
+  
   .hero-title {
-    font-size: 1.8rem;
+    font-size: 2.2rem; /* Still readable on small screens */
+    line-height: 1.1;
+  }
+  
+  .hero-tagline {
+    font-size: 0.8rem;
+    margin-bottom: 20px;
   }
   
   .hero-subtitle {
     font-size: 1rem;
+  }
+  
+  .action-buttons {
+    gap: 12px;
+    margin-top: 25px;
+  }
+  
+  .primary-cta::after {
+    bottom: -18px;
+    font-size: 0.7rem;
+  }
+  
+  .btn-large {
+    max-width: 280px;
+    width: 95%;
+    padding: 14px 28px;
+    font-size: 1rem;
+    min-width: auto;
+  }
+  
+  .btn-accent.btn-large {
+    font-size: 1.1rem;
+    padding: 16px 32px;
+    min-width: auto;
+  }
+  
+  .btn-secondary.btn-large {
+    min-width: auto;
+    font-size: 0.95rem;
+    padding: 12px 24px;
+  }
+  
+  .btn-icon {
+    font-size: 1.2rem;
   }
   
   .features-header h2 {
@@ -306,8 +619,28 @@
   }
   
   .app-logo {
-    width: 80px;
-    height: 80px;
+    width: 72px; /* 40% smaller: 120px * 0.6 = 72px */
+    height: 72px;
+    margin: 0 auto;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-4px);
+  }
+  
+  .feature-icon-container {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .step-card {
+    padding: 20px 15px;
+  }
+  
+  .step-number {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
   }
 }
 
@@ -333,10 +666,33 @@
   color: var(--primary-color-hover);
 }
 
-/* How It Works Section */
+/* How It Works Section - Enhanced with gradient and divider */
 .how-it-works-section {
   margin-top: 80px;
   margin-bottom: 60px;
+  padding: 60px 0;
+  background: linear-gradient(135deg, 
+    rgba(160, 102, 255, 0.03) 0%, 
+    rgba(124, 58, 237, 0.05) 50%, 
+    rgba(95, 27, 153, 0.03) 100%);
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.how-it-works-section::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(160, 102, 255, 0.3) 25%, 
+    rgba(124, 58, 237, 0.5) 50%, 
+    rgba(160, 102, 255, 0.3) 75%, 
+    transparent 100%);
 }
 
 .section-header {
@@ -345,17 +701,21 @@
 }
 
 .section-header h2 {
-  font-size: 2.5rem;
+  font-family: var(--font-header);
+  font-size: var(--font-size-headline);
   color: var(--primary-color);
   margin-bottom: 15px;
   font-weight: 700;
+  text-shadow: var(--text-shadow-medium);
 }
 
 .section-header p {
-  font-size: 1.2rem;
+  font-family: var(--font-body);
+  font-size: var(--font-size-large);
   color: var(--text-secondary);
   max-width: 500px;
   margin: 0 auto;
+  line-height: var(--line-height-normal);
 }
 
 .steps-grid {
@@ -364,25 +724,46 @@
   gap: 30px;
 }
 
+/* Step Cards - Enhanced for magical theme */
 .step-card {
   text-align: center;
-  padding: 30px 20px;
+  padding: 35px 25px;
   position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.4s ease;
+  backdrop-filter: blur(5px);
+}
+
+.step-card:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(160, 102, 255, 0.2);
+  box-shadow: 0 16px 40px rgba(160, 102, 255, 0.15);
 }
 
 .step-number {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  background: linear-gradient(135deg, #a066ff, #7c3aed);
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin: 0 auto 25px;
+  box-shadow: 0 8px 32px rgba(160, 102, 255, 0.4);
+  transition: all 0.4s ease;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.step-card:hover .step-number {
+  transform: scale(1.1) rotateZ(5deg);
+  box-shadow: 0 12px 40px rgba(160, 102, 255, 0.6);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .step-card h3 {
@@ -584,4 +965,27 @@
   .demo-choice-buttons {
     gap: 8px;
   }
+}
+
+/* Section Divider - Wavy SVG pattern */
+.section-divider {
+  width: 100%;
+  height: 60px;
+  background: url("data:image/svg+xml,%3Csvg width='100' height='60' viewBox='0 0 100 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,30 Q25,10 50,30 T100,30 L100,60 L0,60 Z' fill='%23a066ff' fill-opacity='0.1'/%3E%3C/svg%3E") repeat-x;
+  background-size: 100px 60px;
+  margin: 40px 0;
+  position: relative;
+}
+
+.section-divider::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(160, 102, 255, 0.1) 50%, 
+    transparent 100%);
 } 

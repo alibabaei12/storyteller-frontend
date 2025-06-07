@@ -270,8 +270,7 @@ const SharedStoryViewer = () => {
           <h3>Create Your Own Adventure!</h3>
           <p>
             Inspired by {story.character_name}'s {story.setting} journey? Create
-            your own AI-powered interactive story where your choices shape the
-            adventure.
+            your own interactive story where your choices shape the adventure.
           </p>
           <div className="cta-buttons">
             <button

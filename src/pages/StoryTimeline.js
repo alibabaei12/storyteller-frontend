@@ -77,6 +77,28 @@ const StoryTimeline = () => {
     return new Date(timestamp * 1000).toLocaleString();
   };
 
+  const formatChapterDate = (timestamp, index) => {
+    if (!timestamp) {
+      // Generate a realistic progression for demo
+      const baseDate = new Date();
+      baseDate.setHours(baseDate.getHours() - index * 2); // Each chapter 2 hours apart
+      return baseDate.toLocaleString("en-US", {
+        month: "2-digit",
+        day: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    }
+    return new Date(timestamp * 1000).toLocaleString("en-US", {
+      month: "2-digit",
+      day: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
   const handleBackToStory = () => {
     navigate(`/story/${storyId}`);
   };
@@ -167,14 +189,30 @@ const StoryTimeline = () => {
         ) : (
           <div className="timeline-path">
             {storyPath.map((pathItem, index) => (
-              <div key={pathItem.nodeId} className="timeline-item">
+              <div
+                key={pathItem.nodeId}
+                className={`timeline-item timeline-item-${index}`}
+                style={{ animationDelay: `${index * 0.2}s` }}
+              >
                 <div className="timeline-marker">
-                  <div className="timeline-number">{index + 1}</div>
+                  <div className="timeline-thumbnail">
+                    <div className="chapter-number">{index + 1}</div>
+                    <div className="chapter-icon">📖</div>
+                  </div>
+                  <div className="timeline-connector"></div>
                 </div>
 
                 <div className="timeline-content-item">
                   <div className="story-segment">
-                    <h3>Chapter {index + 1}</h3>
+                    <div className="chapter-header">
+                      <h3>Chapter {index + 1}</h3>
+                      <div className="chapter-meta">
+                        <span className="chapter-date">
+                          Updated on:{" "}
+                          {formatChapterDate(pathItem.node.timestamp, index)}
+                        </span>
+                      </div>
+                    </div>
                     <div className="story-text">{pathItem.node.content}</div>
 
                     {pathItem.selectedChoice && (
