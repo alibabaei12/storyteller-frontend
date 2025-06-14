@@ -3,46 +3,46 @@ import "../../styles/StoryCreation.css";
 
 const characterOrigins = [
   {
-    id: "underdog",
-    name: "Rising Underdog",
+    id: "weak",
+    name: "Weak/Underdog",
     description:
-      "Starting from humble beginnings with the heart to overcome any challenge",
+      "Starting with minimal talent, often mocked but destined to rise through determination",
     icon: "🌱",
+  },
+  {
+    id: "normal",
+    name: "Normal/Average",
+    description:
+      "Typical abilities and steady progress - a relatable character with balanced potential",
+    icon: "🙂",
+  },
+  {
+    id: "hidden",
+    name: "Hidden Power",
+    description:
+      "Concealing true abilities or possessing secret techniques unknown to others",
+    icon: "🎭",
   },
   {
     id: "reincarnated",
     name: "Reincarnated",
     description:
-      "Someone reborn with memories or knowledge from a previous life",
+      "Retaining memories and knowledge from a previous life in this world",
     icon: "🔄",
   },
   {
-    id: "mysterious",
-    name: "Mysterious Past",
+    id: "genius",
+    name: "Genius/Prodigy",
     description:
-      "Someone with secrets and a complex history that slowly unfolds",
-    icon: "🎭",
-  },
-  {
-    id: "ambitious",
-    name: "Ambitious Dreamer",
-    description:
-      "Someone with big goals and the drive to achieve them, no matter the obstacles",
+      "Exceptional talent and rapid advancement that astounds peers and masters",
     icon: "⭐",
   },
   {
-    id: "ordinary",
-    name: "Everyday Hero",
+    id: "fallen",
+    name: "Fallen/Disgraced",
     description:
-      "A relatable person living a normal life, ready for extraordinary moments",
-    icon: "🙂",
-  },
-  {
-    id: "intellectual",
-    name: "Brilliant Mind",
-    description:
-      "A clever person who solves problems through wit, knowledge, and creativity",
-    icon: "🧠",
+      "Once powerful but now reduced to lowest levels due to tragedy or betrayal",
+    icon: "💔",
   },
 ];
 

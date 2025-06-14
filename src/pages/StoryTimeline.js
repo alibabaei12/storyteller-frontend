@@ -99,6 +99,54 @@ const StoryTimeline = () => {
     });
   };
 
+  // Filter out [CHOICES] section from story content
+  const processContent = (content) => {
+    if (!content) return "";
+
+    // Check if [CHOICES] tag exists in the content
+    const choicesIndex = content.indexOf("[CHOICES]");
+    if (choicesIndex !== -1) {
+      // Return only the content before the [CHOICES] tag
+      content = content.substring(0, choicesIndex).trim();
+    }
+
+    // Filter out [EMOTIONAL DEPTH] sections
+    const emotionalDepthIndex = content.indexOf("[EMOTIONAL DEPTH]");
+    if (emotionalDepthIndex !== -1) {
+      // Find the end of the [EMOTIONAL DEPTH] section
+      const endIndex = content.indexOf("\n\n", emotionalDepthIndex);
+      if (endIndex !== -1) {
+        // Remove the [EMOTIONAL DEPTH] section
+        content =
+          content.substring(0, emotionalDepthIndex) +
+          content.substring(endIndex);
+      } else {
+        // Just remove everything from [EMOTIONAL DEPTH] to the end if no clear ending
+        content = content.substring(0, emotionalDepthIndex).trim();
+      }
+    }
+
+    // Filter out [NEW CHARACTERS] sections if they exist
+    const newCharactersIndex = content.indexOf("[NEW CHARACTERS]");
+    if (newCharactersIndex !== -1) {
+      const endNewCharactersIndex = content.indexOf(
+        "[/NEW CHARACTERS]",
+        newCharactersIndex
+      );
+      if (endNewCharactersIndex !== -1) {
+        // Remove the section including the end tag
+        content =
+          content.substring(0, newCharactersIndex) +
+          content.substring(endNewCharactersIndex + "[/NEW CHARACTERS]".length);
+      } else {
+        // Just remove from the start tag to the end if no end tag
+        content = content.substring(0, newCharactersIndex).trim();
+      }
+    }
+
+    return content.trim();
+  };
+
   const handleBackToStory = () => {
     navigate(`/story/${storyId}`);
   };
@@ -213,7 +261,9 @@ const StoryTimeline = () => {
                         </span>
                       </div>
                     </div>
-                    <div className="story-text">{pathItem.node.content}</div>
+                    <div className="story-text">
+                      {processContent(pathItem.node.content)}
+                    </div>
 
                     {pathItem.selectedChoice && (
                       <div className="choice-made">

@@ -21,8 +21,6 @@ const NewStory = () => {
     setting: "",
     tone: "shonen", // Default to shonen for manga
     character_origin: "weak", // Default to weak for progression stories
-
-    language_complexity: "simple", // Default to simple/accessible language
     manga_genre: null, // New field for manga-specific genres
   });
 
@@ -92,7 +90,6 @@ const NewStory = () => {
           <StoryTone
             setting={formData.setting}
             tone={formData.tone}
-            languageComplexity={formData.language_complexity}
             updateFormData={updateFormData}
             nextStep={nextStep}
             prevStep={prevStep}

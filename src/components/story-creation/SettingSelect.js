@@ -3,7 +3,7 @@ import "../../styles/StoryCreation.css";
 
 const mangaGenres = [
   {
-    id: "cultivation_progression",
+    id: "cultivation_world",
     name: "Cultivation Progression",
     description:
       "Start as a weak disciple and discover hidden masters, ancient techniques, and grow stronger through trials",
@@ -33,7 +33,7 @@ const SettingSelect = ({ setting, manga_genre, updateFormData, nextStep }) => {
   const handleGenreSelect = (genreId) => {
     // Map manga genre back to compatible setting for backend
     const genreMapping = {
-      cultivation_progression: "cultivation",
+      cultivation_world: "cultivation",
       fantasy_adventure: "fantasy",
       academy_magic: "academy",
     };

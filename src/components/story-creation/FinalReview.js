@@ -56,16 +56,6 @@ const getGenderName = (genderId) => {
   return genderMap[genderId] || genderId;
 };
 
-// Helper function to get readable names for language complexity
-const getLanguageComplexityName = (complexityId) => {
-  const complexityMap = {
-    simple: "Simple & Clear",
-    moderate: "Moderate",
-    complex: "Literary",
-  };
-  return complexityMap[complexityId] || complexityId;
-};
-
 const FinalReview = ({ formData, prevStep, handleSubmit, loading }) => {
   return (
     <div className="creation-step">
@@ -98,10 +88,6 @@ const FinalReview = ({ formData, prevStep, handleSubmit, loading }) => {
           <h4>Story Style</h4>
           <p>
             <strong>Genre:</strong> {getToneName(formData.tone)}
-          </p>
-          <p>
-            <strong>Language:</strong>{" "}
-            {getLanguageComplexityName(formData.language_complexity)}
           </p>
         </div>
       </div>

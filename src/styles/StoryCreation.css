@@ -130,7 +130,7 @@
 }
 
 /* Enhanced background decorations for each genre */
-.setting-card[data-genre="cultivation_progression"]::before {
+.setting-card[data-genre="cultivation_world"]::before {
   content: "🧘";
   position: absolute;
   top: 50%;
@@ -497,7 +497,7 @@
     margin-bottom: 12px;
   }
   
-  .setting-card[data-genre="cultivation_progression"]::before,
+  .setting-card[data-genre="cultivation_world"]::before,
   .setting-card[data-genre="fantasy_adventure"]::before,
   .setting-card[data-genre="academy_magic"]::before {
     font-size: 8rem; /* Smaller background decoration on mobile */
